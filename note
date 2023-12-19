@@ -1,0 +1,7 @@
+https://github.com/kprabhat248/melodify  music player git hub
+
+<key>NSFaceIDUsageDescription</key>
+<string>Why is my app authenticating using face id?</string>
+
+
+flutter pub run flutter_launcher_icons:main

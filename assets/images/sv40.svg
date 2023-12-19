@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+  <g id="_1_card" data-name="1 card" transform="translate(5342 -13115)">
+    <g id="Rectangle_665" data-name="Rectangle 665" transform="translate(-5342 13118)" fill="#323232" stroke="#323232" stroke-width="2">
+      <rect width="2" height="12" rx="1" stroke="none"/>
+      <rect x="1" y="1" height="10" fill="none"/>
+    </g>
+    <g id="Rectangle_666" data-name="Rectangle 666" transform="translate(-5326 13118)" fill="#323232" stroke="#323232" stroke-width="2">
+      <rect width="2" height="12" rx="1" stroke="none"/>
+      <rect x="1" y="1" height="10" fill="none"/>
+    </g>
+    <g id="Rectangle_667" data-name="Rectangle 667" transform="translate(-5338 13115)" fill="none" stroke="#323232" stroke-width="2">
+      <rect width="10" height="18" rx="2" stroke="none"/>
+      <rect x="1" y="1" width="8" height="16" rx="1" fill="none"/>
+    </g>
+  </g>
+</svg>
