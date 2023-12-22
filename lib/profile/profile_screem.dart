@@ -172,6 +172,31 @@ class _ProfileScreemState extends State<ProfileScreem>
                                         width: 10,
                                       ),
                                       Text(
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => UserUpdateScreen(),
+                                      ),
+                                    );
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: AppColor.mainColor,
+                                            shape: BoxShape.circle),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Image.asset(
+                                              BookImages.changePassword),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
                                         "Update User",
                                         style: Theme.of(context)
                                             .textTheme
@@ -325,45 +350,43 @@ class _ProfileScreemState extends State<ProfileScreem>
                                 SizedBox(
                                   height: 10,
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    print("hhhhhhhhhh");
-                                    showAlertDialog(context,
-                                        title: 'Log out ?',
-                                        btnTitle: "Logout",
-                                        subTitle:
-                                            'Are you sure you want to Logout? ',
-                                        onTap: () {
-                                      RepoRepository.logOut().then((value) {
-                                        //if request is true delete account
-                                        if (value == true) {
-                                          LocalDataStorage.clearUser();
-                                          Navigator.pushNamed(context, "/");
-                                        }
-                                      }).onError((error, stackTrace) {
-                                        LocalDataStorage.clearUser();
-                                        Navigator.pushNamed(context, "/");
-                                      });
-                                    });
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: AppColor.mainColor,
-                                            shape: BoxShape.circle),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(12.0),
-                                          child: Icon(
-                                            Icons.logout,
-                                            color: Colors.white,
-                                          ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color: AppColor.mainColor,
+                                          shape: BoxShape.circle),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Icon(
+                                          Icons.logout,
+                                          color: Colors.white,
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        showAlertDialog(context,
+                                            title: 'Log out ?',
+                                            subTitle:
+                                                'Are you sure you want to Logout? ',
+                                            onTap: () {
+                                          RepoRepository.logOut().then((value) {
+                                            //if request is true delete account
+                                            if (value == true) {
+                                              LocalDataStorage.clearUser();
+                                              Navigator.pushNamed(context, "/");
+                                            }
+                                          }).onError((error, stackTrace) {
+                                            LocalDataStorage.clearUser();
+                                            Navigator.pushNamed(context, "/");
+                                          });
+                                        });
+                                      },
+                                      child: Text(
                                         "Logout",
                                         style: Theme.of(context)
                                             .textTheme
