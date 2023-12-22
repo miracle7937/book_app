@@ -7,9 +7,8 @@ Future<void> showAlertDialog(BuildContext context,
     context: context,
     builder: (BuildContext context) {
       return CupertinoAlertDialog(
-        title: Text('Delete Account?'),
-        content: Text(
-            'Are you sure you want to delete your account? This action cannot be undone.'),
+        title: Text(title ?? ""),
+        content: Text(subTitle ?? ""),
         actions: <Widget>[
           CupertinoDialogAction(
             isDestructiveAction: true,
@@ -25,7 +24,6 @@ Future<void> showAlertDialog(BuildContext context,
             },
             child: Text(
               'Cancel',
-              style: TextStyle(color: Colors.black),
             ),
           ),
         ],
