@@ -147,31 +147,31 @@ class _ProfileScreemState extends State<ProfileScreem>
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: AppColor.mainColor,
-                                          shape: BoxShape.circle),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Image.asset(
-                                            BookImages.changePassword),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => UserUpdateScreen(),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (_) => UserUpdateScreen(),
-                                          ),
-                                        );
-                                      },
-                                      child: Text(
+                                    );
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: AppColor.mainColor,
+                                            shape: BoxShape.circle),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Image.asset(
+                                              BookImages.changePassword),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
                                         "Update User",
                                         style: Theme.of(context)
                                             .textTheme
@@ -180,8 +180,8 @@ class _ProfileScreemState extends State<ProfileScreem>
                                               fontSize: 14,
                                             ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -190,31 +190,31 @@ class _ProfileScreemState extends State<ProfileScreem>
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: AppColor.mainColor,
-                                          shape: BoxShape.circle),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child:
-                                            Image.asset(BookImages.manageCard),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => SavedCardScreen(),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (_) => SavedCardScreen(),
-                                          ),
-                                        );
-                                      },
-                                      child: Row(
+                                    );
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: AppColor.mainColor,
+                                            shape: BoxShape.circle),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Image.asset(
+                                              BookImages.manageCard),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
@@ -229,8 +229,8 @@ class _ProfileScreemState extends State<ProfileScreem>
                                           ),
                                         ],
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -239,31 +239,31 @@ class _ProfileScreemState extends State<ProfileScreem>
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: AppColor.mainColor,
-                                          shape: BoxShape.circle),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child:
-                                            Image.asset(BookImages.contact_us),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => ContactUs(),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (_) => ContactUs(),
-                                          ),
-                                        );
-                                      },
-                                      child: Text(
+                                    );
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: AppColor.mainColor,
+                                            shape: BoxShape.circle),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Image.asset(
+                                              BookImages.contact_us),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
                                         "Contact us",
                                         style: Theme.of(context)
                                             .textTheme
@@ -272,8 +272,8 @@ class _ProfileScreemState extends State<ProfileScreem>
                                               fontSize: 14,
                                             ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -282,30 +282,31 @@ class _ProfileScreemState extends State<ProfileScreem>
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: AppColor.mainColor,
-                                          shape: BoxShape.circle),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Image.asset(BookImages.fa_legal),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => LegalTermsScreen(),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (_) => LegalTermsScreen(),
-                                          ),
-                                        );
-                                      },
-                                      child: Text(
+                                    );
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: AppColor.mainColor,
+                                            shape: BoxShape.circle),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child:
+                                              Image.asset(BookImages.fa_legal),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
                                         "Legal Terms",
                                         style: Theme.of(context)
                                             .textTheme
@@ -314,8 +315,8 @@ class _ProfileScreemState extends State<ProfileScreem>
                                               fontSize: 14,
                                             ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -324,43 +325,44 @@ class _ProfileScreemState extends State<ProfileScreem>
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: AppColor.mainColor,
-                                          shape: BoxShape.circle),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Icon(
-                                          Icons.logout,
-                                          color: Colors.white,
+                                InkWell(
+                                  onTap: () {
+                                    print("hhhhhhhhhh");
+                                    showAlertDialog(context,
+                                        title: 'Log out ?',
+                                        subTitle:
+                                            'Are you sure you want to Logout? ',
+                                        onTap: () {
+                                      RepoRepository.logOut().then((value) {
+                                        //if request is true delete account
+                                        if (value == true) {
+                                          LocalDataStorage.clearUser();
+                                          Navigator.pushNamed(context, "/");
+                                        }
+                                      }).onError((error, stackTrace) {
+                                        LocalDataStorage.clearUser();
+                                        Navigator.pushNamed(context, "/");
+                                      });
+                                    });
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: AppColor.mainColor,
+                                            shape: BoxShape.circle),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Icon(
+                                            Icons.logout,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        showAlertDialog(context,
-                                            title: 'Log out ?',
-                                            subTitle:
-                                                'Are you sure you want to Logout? ',
-                                            onTap: () {
-                                          RepoRepository.logOut().then((value) {
-                                            //if request is true delete account
-                                            if (value == true) {
-                                              LocalDataStorage.clearUser();
-                                              Navigator.pushNamed(context, "/");
-                                            }
-                                          }).onError((error, stackTrace) {
-                                            LocalDataStorage.clearUser();
-                                            Navigator.pushNamed(context, "/");
-                                          });
-                                        });
-                                      },
-                                      child: Text(
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
                                         "Logout",
                                         style: Theme.of(context)
                                             .textTheme
@@ -369,8 +371,8 @@ class _ProfileScreemState extends State<ProfileScreem>
                                               fontSize: 14,
                                             ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -385,41 +387,40 @@ class _ProfileScreemState extends State<ProfileScreem>
                               ],
                             ),
                           ),
-                          Row(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: AppColor.mainColor,
-                                    shape: BoxShape.circle),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Image.asset(BookImages.delete_icon),
+                          InkWell(
+                            onTap: () {
+                              showAlertDialog(context,
+                                  title: 'Delete Account?',
+                                  subTitle:
+                                      'Are you sure you want to delete your account? This action cannot be undone.',
+                                  onTap: () {
+                                RepoRepository.deleteAccount().then((value) {
+                                  //if request is true delete account
+                                  if (value == true) {
+                                    LocalDataStorage.clearUser();
+                                    Navigator.pushNamed(context, "/");
+                                  }
+                                }).onError((error, stackTrace) {
+                                  LocalDataStorage.clearUser();
+                                  Navigator.pushNamed(context, "/");
+                                });
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                      color: AppColor.mainColor,
+                                      shape: BoxShape.circle),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Image.asset(BookImages.delete_icon),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  showAlertDialog(context,
-                                      title: 'Delete Account?',
-                                      subTitle:
-                                          'Are you sure you want to delete your account? This action cannot be undone.',
-                                      onTap: () {
-                                    RepoRepository.deleteAccount()
-                                        .then((value) {
-                                      //if request is true delete account
-                                      if (value == true) {
-                                        LocalDataStorage.clearUser();
-                                        Navigator.pushNamed(context, "/");
-                                      }
-                                    }).onError((error, stackTrace) {
-                                      LocalDataStorage.clearUser();
-                                      Navigator.pushNamed(context, "/");
-                                    });
-                                  });
-                                },
-                                child: Text(
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
                                   "Delete Account",
                                   style: Theme.of(context)
                                       .textTheme
@@ -428,8 +429,8 @@ class _ProfileScreemState extends State<ProfileScreem>
                                         fontSize: 14,
                                       ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           SizedBox(
                             height: 10,
