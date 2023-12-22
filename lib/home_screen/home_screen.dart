@@ -207,8 +207,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                 homeController?.getHomeData(refresh: true);
                               }
                             },
-                            myPlan: homeController
-                                ?.homeResponseModel?.data?.myPlan?.first,
+                            myPlan: (homeController
+                                ?.homeResponseModel?.data?.myPlan ?? []).isEmpty? null: (homeController
+                                ?.homeResponseModel?.data?.myPlan ?? []).first ,
                           ),
                           SizedBox(
                             height: 20,
