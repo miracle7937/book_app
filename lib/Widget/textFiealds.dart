@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lovebook/Constance/theme.dart';
+import '../Constance/theme.dart';
 
 class MyTextFieald extends StatefulWidget {
   final String hintText;

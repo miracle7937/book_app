@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/Widget/buttons.dart';
+import '../Constance/constance.dart';
+import '../Widget/buttons.dart';
 
 class CompleteScreen extends StatefulWidget {
   const CompleteScreen({super.key});

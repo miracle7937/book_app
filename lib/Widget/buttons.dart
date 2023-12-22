@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:lovebook/Constance/theme.dart';
+import '../Constance/theme.dart';
 
 class MyButton extends StatelessWidget {
   final String btnName;

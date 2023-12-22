@@ -3,13 +3,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovebook/data_layer/models/user_response.dart';
-import 'package:lovebook/data_layer/repository/profile_repository.dart';
-import 'package:lovebook/profile/saved_card_screen.dart';
-import 'package:lovebook/profile/update_screen_user.dart';
-import 'package:lovebook/profile/widget/select_image_view.dart';
-import 'package:lovebook/utils/color.dart';
-import 'package:lovebook/utils/images.dart';
+import '../data_layer/models/user_response.dart';
+import '../data_layer/repository/profile_repository.dart';
+import '../profile/saved_card_screen.dart';
+import '../profile/update_screen_user.dart';
+import '../profile/widget/select_image_view.dart';
+import '../utils/color.dart';
+import '../utils/images.dart';
 
 import '../utils/dialog/alart_dialog.dart';
 import '../utils/local_storage_data.dart';

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lovebook/utils/custom_cache_image.dart';
-import 'package:lovebook/utils/images.dart';
+
 
 import '../../data_layer/models/home_response_model.dart';
+import '../../utils/custom_cache_image.dart';
+import '../../utils/images.dart';
 import '../../utils/string_helper.dart';
 
 class BookOfTheWeek extends StatelessWidget {

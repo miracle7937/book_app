@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_time_ago/get_time_ago.dart';
 import 'package:lottie/lottie.dart';
-import 'package:lovebook/utils/images.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:video_player/video_player.dart';
 
@@ -15,6 +14,7 @@ import '../../data_layer/models/post_model_response.dart';
 import '../../profile/widget/select_image_view.dart';
 import '../../utils/dialog/coumminity_post_message_dialog.dart';
 import '../../utils/file_format_checker.dart';
+import '../../utils/images.dart';
 import '../../utils/string_helper.dart';
 import '../../utils/themes/theme_manager.dart';
 

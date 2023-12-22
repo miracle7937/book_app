@@ -3,8 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/Constance/theme.dart';
+import '../Constance/constance.dart';
+import '../Constance/theme.dart';
 
 class TheDivineComedyScreen extends StatefulWidget {
   const TheDivineComedyScreen({super.key});

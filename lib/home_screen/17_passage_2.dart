@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/home_screen/18_passage_3.dart';
+import '../Constance/constance.dart';
+import '../home_screen/18_passage_3.dart';
 
 class Passage2Screen extends StatefulWidget {
   const Passage2Screen({super.key});

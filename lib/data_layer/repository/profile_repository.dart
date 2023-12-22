@@ -1,9 +1,10 @@
-import 'package:lovebook/data_layer/models/generic_reponse.dart';
-import 'package:lovebook/data_layer/models/user_response.dart';
+
 
 import '../api_route/api_route.dart';
 import '../models/contact_us_model.dart';
+import '../models/generic_reponse.dart';
 import '../models/legal_terms_model.dart';
+import '../models/user_response.dart';
 import '../request.dart';
 
 class RepoRepository {

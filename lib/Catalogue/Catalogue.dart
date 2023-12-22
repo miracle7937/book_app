@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lovebook/Catalogue/54_books.dart';
-import 'package:lovebook/Constance/constance.dart';
+import '../Catalogue/54_books.dart';
+import '../Constance/constance.dart';
 
 class CatalogueScreen extends StatefulWidget {
   final AnimationController animationController;

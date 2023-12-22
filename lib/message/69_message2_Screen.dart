@@ -1,8 +1,8 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/message/70_message3Screen.dart';
+import '../Constance/constance.dart';
+import '../message/70_message3Screen.dart';
 
 class Message2Screen extends StatefulWidget {
   const Message2Screen({super.key});

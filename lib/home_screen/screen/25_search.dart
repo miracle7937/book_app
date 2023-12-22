@@ -4,14 +4,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovebook/Widget/textFiealds2.dart';
-import 'package:lovebook/data_layer/controller/searchbook_controller.dart';
-import 'package:lovebook/data_layer/manager/manager.dart';
-import 'package:lovebook/utils/scaffold/custom_scaffold.dart';
+
 
 import '../../Widget/linear_indicator.dart';
+import '../../Widget/textFiealds2.dart';
+import '../../data_layer/controller/searchbook_controller.dart';
+import '../../data_layer/manager/manager.dart';
 import '../../data_layer/models/search_book_response.dart';
 import '../../utils/page_state.dart';
+import '../../utils/scaffold/custom_scaffold.dart';
 import '../widget/shimmer_widget.dart';
 import '9_FROM_HELL.dart';
 

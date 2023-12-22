@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/Constance/theme.dart';
+import '../Constance/constance.dart';
+import '../Constance/theme.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key});

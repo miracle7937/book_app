@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lovebook/Constance/constance.dart';
+import '../Constance/constance.dart';
 
 class Passage3Screen extends StatefulWidget {
   const Passage3Screen({super.key});

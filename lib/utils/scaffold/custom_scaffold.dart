@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lovebook/utils/color.dart';
-import 'package:lovebook/utils/page_state.dart';
+
+import '../color.dart';
+import '../page_state.dart';
+
 
 class CustomScaffold extends StatelessWidget {
   final AppBar? appBar;

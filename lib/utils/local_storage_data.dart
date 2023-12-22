@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:lovebook/utils/constant_string.dart';
+import '../utils/constant_string.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data_layer/models/registration_model.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lovebook/data_layer/models/home_response_model.dart';
-import 'package:lovebook/utils/custom_cache_image.dart';
+import '../../data_layer/models/home_response_model.dart';
+import '../../utils/custom_cache_image.dart';
+
 
 class ViewedWidget extends StatelessWidget {
   final Viewd viewd;

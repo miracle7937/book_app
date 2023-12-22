@@ -3,7 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovebook/utils/scaffold/custom_scaffold.dart';
+import '../utils/scaffold/custom_scaffold.dart';
 
 import '../Widget/rating_stars.dart';
 import '../data_layer/manager/manager.dart';

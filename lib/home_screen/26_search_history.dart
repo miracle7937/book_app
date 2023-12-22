@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors, deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/Constance/theme.dart';
-import 'package:lovebook/Widget/textFiealds2.dart';
-import 'package:lovebook/home_screen/27_search_photo.dart';
+import '../Constance/constance.dart';
+import '../Constance/theme.dart';
+import '../Widget/textFiealds2.dart';
+import '../home_screen/27_search_photo.dart';
 
 class SerchHistoryScreen extends StatefulWidget {
   const SerchHistoryScreen({super.key});

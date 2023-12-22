@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovebook/Widget/buttons.dart';
-import 'package:lovebook/profile/widget/select_image_view.dart';
+import '../Widget/buttons.dart';
+import '../profile/widget/select_image_view.dart';
 
 import '../Widget/textFiealds2.dart';
 import '../data_layer/controller/profile_controller.dart';

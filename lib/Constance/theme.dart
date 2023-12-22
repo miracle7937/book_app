@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/utils/color.dart';
+import '../Constance/constance.dart';
+import '../utils/color.dart';
 
 import '../utils/local_storage_data.dart';
 

@@ -1,7 +1,8 @@
-import 'package:lovebook/data_layer/models/generic_reponse.dart';
-import 'package:lovebook/data_layer/models/registration_model.dart';
+
 
 import '../api_route/api_route.dart';
+import '../models/generic_reponse.dart';
+import '../models/registration_model.dart';
 import '../models/user_response.dart';
 import '../request.dart';
 

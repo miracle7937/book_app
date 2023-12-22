@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovebook/community/image_upload_screen.dart';
-import 'package:lovebook/utils/images.dart';
+
 
 import '../../data_layer/manager/manager.dart';
 import '../../utils/color.dart';
+import '../../utils/images.dart';
 import '../../utils/string_helper.dart';
 import '../../utils/themes/theme_manager.dart';
+import '../image_upload_screen.dart';
 import '../video_upload_screen.dart';
 
 class CommunityMessageWidget extends StatelessWidget {

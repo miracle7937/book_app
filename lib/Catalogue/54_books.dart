@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lovebook/Catalogue/55_the_divine_comedy.dart';
-import 'package:lovebook/Constance/constance.dart';
+import '../Catalogue/55_the_divine_comedy.dart';
+import '../Constance/constance.dart';
 
 class BooksScreen extends StatefulWidget {
   const BooksScreen({super.key});

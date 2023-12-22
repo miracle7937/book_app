@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:lovebook/Constance/constance.dart';
+import '../Constance/constance.dart';
 
 class SerchPhotoScreen extends StatefulWidget {
   const SerchPhotoScreen({super.key});

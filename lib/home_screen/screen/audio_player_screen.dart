@@ -4,8 +4,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
-import 'package:lovebook/data_layer/models/book_preview_data.dart';
-import 'package:lovebook/utils/color.dart';
+import '../../data_layer/models/book_preview_data.dart';
+import '../../utils/color.dart';
 
 class AudioPlayerScreen extends StatefulWidget {
   final PreviewBook? book;

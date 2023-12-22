@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lovebook/utils/page_state.dart';
 
+import '../../utils/page_state.dart';
 import '../repository/home_repository.dart';
 
 class SubscribeController extends ChangeNotifier {

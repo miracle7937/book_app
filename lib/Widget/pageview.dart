@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/Constance/theme.dart';
-import 'package:lovebook/Stock/Stock.dart';
-import 'package:lovebook/home_screen/home_screen.dart';
-import 'package:lovebook/message/message_screen.dart';
-import 'package:lovebook/profile/profile_screem.dart';
-import 'package:lovebook/utils/images.dart';
-import 'package:lovebook/utils/music_player_util/music_controller.dart';
+import '../Constance/constance.dart';
+import '../Constance/theme.dart';
+import '../Stock/Stock.dart';
+import '../home_screen/home_screen.dart';
+import '../message/message_screen.dart';
+import '../profile/profile_screem.dart';
+import '../utils/images.dart';
+import '../utils/music_player_util/music_controller.dart';
 
 import '../community/community_main_page.dart';
 import '../data_layer/manager/manager.dart';
