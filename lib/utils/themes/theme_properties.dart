@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lovebook/utils/color.dart';
+
+import '../color.dart';
 
 final darkModeTheme = ThemeData(
   brightness: Brightness.dark,

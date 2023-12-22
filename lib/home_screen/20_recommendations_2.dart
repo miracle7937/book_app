@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/Constance/theme.dart';
-import 'package:lovebook/home_screen/21_recommendations3.dart';
-import 'package:lovebook/home_screen/22_filter.dart';
+import '../Constance/constance.dart';
+import '../Constance/theme.dart';
+import '../home_screen/21_recommendations3.dart';
+import '../home_screen/22_filter.dart';
 
 class Recommendations2Screen extends StatefulWidget {
   const Recommendations2Screen({super.key});

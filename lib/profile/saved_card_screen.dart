@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovebook/data_layer/models/user_response.dart';
-import 'package:lovebook/utils/images.dart';
-import 'package:lovebook/utils/scaffold/custom_scaffold.dart';
+import '../data_layer/models/user_response.dart';
+import '../utils/images.dart';
+import '../utils/scaffold/custom_scaffold.dart';
 
 import '../data_layer/controller/profile_controller.dart';
 import '../data_layer/manager/manager.dart';

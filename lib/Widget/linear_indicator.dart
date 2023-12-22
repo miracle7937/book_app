@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lovebook/utils/color.dart';
+import '../utils/color.dart';
 
 class BookLinearProgressBar extends StatelessWidget {
   final bool? isloading;

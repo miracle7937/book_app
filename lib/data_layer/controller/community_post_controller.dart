@@ -4,11 +4,12 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:lovebook/data_layer/api_route/api_route.dart';
-import 'package:lovebook/data_layer/models/generic_reponse.dart';
+
 
 import '../../utils/local_storage_data.dart';
 import '../../utils/string_helper.dart';
+import '../api_route/api_route.dart';
+import '../models/generic_reponse.dart';
 
 class VideoUploadNotifier extends ChangeNotifier {
   double state = 0.0;

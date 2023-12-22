@@ -2,12 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lovebook/data_layer/models/contact_us_model.dart';
-import 'package:lovebook/data_layer/models/legal_terms_model.dart';
-import 'package:lovebook/utils/local_storage_data.dart';
-import 'package:lovebook/utils/string_helper.dart';
 
+
+import '../../utils/local_storage_data.dart';
 import '../../utils/page_state.dart';
+import '../../utils/string_helper.dart';
+import '../models/contact_us_model.dart';
+import '../models/legal_terms_model.dart';
 import '../models/user_response.dart';
 import '../repository/profile_repository.dart';
 import '../request.dart';

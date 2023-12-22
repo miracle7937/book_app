@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovebook/home_screen/screen/web_view_payment_screen.dart';
-import 'package:lovebook/utils/local_storage_data.dart';
-import 'package:lovebook/utils/scaffold/custom_scaffold.dart';
+
 
 import '../../data_layer/controller/subscribe_controller.dart';
 import '../../data_layer/manager/manager.dart';
@@ -11,6 +9,9 @@ import '../../utils/color.dart';
 import '../../utils/dialog/snack_bars.dart';
 import '../../utils/images.dart';
 import '../../utils/list_helper.dart';
+import '../../utils/local_storage_data.dart';
+import '../../utils/scaffold/custom_scaffold.dart';
+import 'web_view_payment_screen.dart';
 
 class SubscribeScreen extends ConsumerStatefulWidget {
   const SubscribeScreen({Key? key}) : super(key: key);

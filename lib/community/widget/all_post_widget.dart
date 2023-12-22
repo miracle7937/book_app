@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovebook/data_layer/manager/manager.dart';
 
 import '../../data_layer/controller/communityController.dart';
+import '../../data_layer/manager/manager.dart';
 import '../single_post_screen.dart';
 import 'chat_view.dart';
 import 'community_message_widget.dart';

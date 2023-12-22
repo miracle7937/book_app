@@ -1,12 +1,12 @@
-import 'package:lovebook/data_layer/models/generic_reponse.dart';
-import 'package:lovebook/data_layer/models/home_response_model.dart';
-import 'package:lovebook/data_layer/models/subscribe_model.dart';
 
 import '../api_route/api_route.dart';
 import '../models/audio_player_model.dart';
 import '../models/book_preview_data.dart';
+import '../models/generic_reponse.dart';
+import '../models/home_response_model.dart';
 import '../models/read_book_model.dart';
 import '../models/search_book_response.dart';
+import '../models/subscribe_model.dart';
 import '../request.dart';
 
 class HomeRepository {

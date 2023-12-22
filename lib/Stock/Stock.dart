@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/Stock/49_stock2.dart';
+import '../Constance/constance.dart';
+import '../Stock/49_stock2.dart';
 
 class StockScreen extends StatefulWidget {
   final AnimationController animationController;

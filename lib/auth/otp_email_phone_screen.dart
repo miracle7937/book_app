@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovebook/Widget/buttons.dart';
-import 'package:lovebook/utils/dialog/snack_bars.dart';
+import '../Widget/buttons.dart';
+import '../utils/dialog/snack_bars.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../Widget/linear_indicator.dart';

@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/utils/constant_string.dart';
+import '../Constance/constance.dart';
+import '../utils/constant_string.dart';
 
 import '../data_layer/models/book_preview_data.dart';
 import '../profile/widget/select_image_view.dart';

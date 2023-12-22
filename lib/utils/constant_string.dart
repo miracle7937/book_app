@@ -1,5 +1,5 @@
 import 'package:get_time_ago/get_time_ago.dart';
-import 'package:lovebook/utils/string_helper.dart';
+import '../utils/string_helper.dart';
 
 class ConstantString {
   static final userDataKey = "UserData";

@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/Constance/theme.dart';
-import 'package:lovebook/home_screen/29_cart_is_empty_1.dart';
+import '../Constance/constance.dart';
+import '../Constance/theme.dart';
+import '../home_screen/29_cart_is_empty_1.dart';
 
 class CartIsEmptyScreen extends StatefulWidget {
   const CartIsEmptyScreen({super.key});

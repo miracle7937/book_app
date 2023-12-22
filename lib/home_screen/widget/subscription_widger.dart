@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lovebook/utils/color.dart';
-import 'package:lovebook/utils/images.dart';
+
 
 import '../../data_layer/models/home_response_model.dart';
+import '../../utils/color.dart';
+import '../../utils/images.dart';
 
 class SubscriptionWidget extends StatefulWidget {
   final MyPlan? myPlan;

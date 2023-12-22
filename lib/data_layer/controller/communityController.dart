@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lovebook/data_layer/models/generic_reponse.dart';
 
 import '../../utils/page_state.dart';
 import '../../utils/string_helper.dart';
+import '../models/generic_reponse.dart';
 import '../models/post_comment_model.dart';
 import '../models/post_model_response.dart';
 import '../repository/community_repository.dart';

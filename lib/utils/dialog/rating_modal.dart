@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lovebook/Widget/buttons.dart';
-import 'package:lovebook/Widget/rating_stars.dart';
+import 'package:sidecampus/Widget/rating_stars.dart';
 
+import '../../Widget/buttons.dart';
 import '../../Widget/textFiealds.dart';
 
 void showRatingBookModal(

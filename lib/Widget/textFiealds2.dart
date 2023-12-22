@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, override_on_non_overriding_member, unused_import, deprecated_member_use, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:lovebook/Constance/theme.dart';
+import '../Constance/theme.dart';
 
 class MyTextFieald2 extends StatefulWidget {
   final String hintText;

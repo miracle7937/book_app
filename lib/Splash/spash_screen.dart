@@ -1,11 +1,11 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors_in_immutables, prefer_const_constructors, unnecessary_new, library_private_types_in_public_api, use_build_context_synchronously, unused_import
 import 'package:flutter/material.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/Constance/theme.dart';
-import 'package:lovebook/auth/register.dart';
-import 'package:lovebook/main.dart';
-import 'package:lovebook/utils/images.dart';
-import 'package:lovebook/utils/local_storage_data.dart';
+import '../Constance/constance.dart';
+import '../Constance/theme.dart';
+import '../auth/register.dart';
+import '../main.dart';
+import '../utils/images.dart';
+import '../utils/local_storage_data.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key);

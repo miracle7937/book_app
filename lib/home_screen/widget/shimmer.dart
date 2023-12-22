@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lovebook/utils/color.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../utils/color.dart';
 
 class ShimmerView extends StatelessWidget {
   final double height;

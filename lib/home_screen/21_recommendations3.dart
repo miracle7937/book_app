@@ -1,9 +1,9 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/Constance/theme.dart';
-import 'package:lovebook/home_screen/22_filter.dart';
+import '../Constance/constance.dart';
+import '../Constance/theme.dart';
+import '../home_screen/22_filter.dart';
 
 class Recommendation3Screen extends StatefulWidget {
   const Recommendation3Screen({super.key});

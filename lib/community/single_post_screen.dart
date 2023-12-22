@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_time_ago/get_time_ago.dart';
-import 'package:lovebook/community/widget/chat_view.dart';
-import 'package:lovebook/utils/scaffold/custom_scaffold.dart';
+import '../community/widget/chat_view.dart';
+import '../utils/scaffold/custom_scaffold.dart';
 
 import '../data_layer/manager/manager.dart';
 import '../data_layer/models/post_comment_model.dart';

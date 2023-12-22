@@ -1,13 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
-import 'package:lovebook/data_layer/repository/registration_repo.dart';
-import 'package:lovebook/utils/local_storage_data.dart';
-import 'package:lovebook/utils/page_state.dart';
+
 
 import '../../utils/biometric_controller.dart';
+import '../../utils/local_storage_data.dart';
+import '../../utils/page_state.dart';
 import '../models/registration_model.dart';
 import '../models/user_credential_model.dart';
+import '../repository/registration_repo.dart';
 import '../request.dart';
 
 class RegistrationController extends ChangeNotifier {

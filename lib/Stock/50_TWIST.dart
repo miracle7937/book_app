@@ -1,9 +1,9 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:lovebook/Constance/theme.dart';
-import 'package:lovebook/Stock/52_TWIST_2.dart';
-import 'package:lovebook/Widget/buttons.dart';
+import '../Constance/theme.dart';
+import '../Stock/52_TWIST_2.dart';
+import '../Widget/buttons.dart';
 
 class TwistScreen extends StatefulWidget {
   const TwistScreen({super.key});

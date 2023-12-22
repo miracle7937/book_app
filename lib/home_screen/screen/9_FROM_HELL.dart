@@ -2,24 +2,25 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/Constance/theme.dart';
-import 'package:lovebook/data_layer/controller/home_controller.dart';
-import 'package:lovebook/data_layer/models/audio_player_model.dart';
-import 'package:lovebook/data_layer/models/book_preview_data.dart';
-import 'package:lovebook/home_screen/11_best_review.dart';
-import 'package:lovebook/home_screen/screen/pdf_reader_screen.dart';
-import 'package:lovebook/utils/images.dart';
-import 'package:lovebook/utils/list_helper.dart';
-import 'package:lovebook/utils/string_helper.dart';
+import 'package:sidecampus/home_screen/screen/pdf_reader_screen.dart';
 
+
+import '../../Constance/constance.dart';
+import '../../Constance/theme.dart';
 import '../../Widget/rating_stars.dart';
+import '../../data_layer/controller/home_controller.dart';
 import '../../data_layer/manager/manager.dart';
+import '../../data_layer/models/audio_player_model.dart';
+import '../../data_layer/models/book_preview_data.dart';
 import '../../utils/constant_string.dart';
 import '../../utils/dialog/rating_modal.dart';
 import '../../utils/dialog/snack_bars.dart';
+import '../../utils/images.dart';
+import '../../utils/list_helper.dart';
 import '../../utils/scaffold/custom_scaffold.dart';
+import '../../utils/string_helper.dart';
 import '../../utils/themes/theme_manager.dart';
+import '../11_best_review.dart';
 
 class FromHellScreen extends ConsumerStatefulWidget {
   const FromHellScreen({super.key, this.bookID});

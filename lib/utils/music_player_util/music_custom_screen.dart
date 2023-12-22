@@ -2,11 +2,12 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovebook/data_layer/manager/manager.dart';
-import 'package:lovebook/utils/music_player_util/music_controller.dart';
 
+
+import '../../data_layer/manager/manager.dart';
 import '../color.dart';
 import '../slide_up_panel.dart';
+import 'music_controller.dart';
 
 class PlayerScreen extends ConsumerWidget {
   const PlayerScreen({super.key});

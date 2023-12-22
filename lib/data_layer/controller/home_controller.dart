@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
-import 'package:lovebook/utils/page_state.dart';
+import '../../utils/page_state.dart';
 
 import '../models/audio_player_model.dart';
 import '../models/book_preview_data.dart';

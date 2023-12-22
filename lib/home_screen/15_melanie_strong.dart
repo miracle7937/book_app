@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lovebook/Constance/constance.dart';
-import 'package:lovebook/Constance/theme.dart';
-import 'package:lovebook/home_screen/16_passage.dart';
+import '../Constance/constance.dart';
+import '../Constance/theme.dart';
+import '../home_screen/16_passage.dart';
 
 class MelanieStrongScreen extends StatefulWidget {
   const MelanieStrongScreen({super.key});

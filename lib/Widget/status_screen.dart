@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:lovebook/Widget/buttons.dart';
-import 'package:lovebook/utils/images.dart';
+import '../Widget/buttons.dart';
+import '../utils/images.dart';
 
 class StatusScreen extends StatelessWidget {
   final String? title;

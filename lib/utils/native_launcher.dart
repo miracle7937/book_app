@@ -1,4 +1,4 @@
-import 'package:lovebook/utils/string_helper.dart';
+import '../utils/string_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 launchContactMethod(ContactMethod method, String? value) async {

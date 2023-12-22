@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovebook/community/widget/all_post_widget.dart';
-import 'package:lovebook/community/widget/my_post_widget.dart';
-import 'package:lovebook/utils/scaffold/custom_scaffold.dart';
+import '../community/widget/all_post_widget.dart';
+import '../community/widget/my_post_widget.dart';
+import '../utils/scaffold/custom_scaffold.dart';
 
 import '../data_layer/controller/communityController.dart';
 import '../data_layer/manager/manager.dart';

@@ -1,4 +1,5 @@
-import 'package:lovebook/data_layer/models/post_model_response.dart';
+
+import 'post_model_response.dart';
 
 class PostCommentModel {
   bool? status;

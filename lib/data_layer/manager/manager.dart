@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovebook/data_layer/controller/searchbook_controller.dart';
 
 import '../../utils/music_player_util/music_controller.dart';
 import '../controller/communityController.dart';
@@ -7,6 +6,7 @@ import '../controller/community_post_controller.dart';
 import '../controller/home_controller.dart';
 import '../controller/profile_controller.dart';
 import '../controller/registraion_controller.dart';
+import '../controller/searchbook_controller.dart';
 import '../controller/subscribe_controller.dart';
 
 final registrationController =

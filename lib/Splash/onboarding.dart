@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovebook/Constance/constance.dart';
+import '../Constance/constance.dart';
 
 import '../auth/register.dart';
 import '../utils/themes/theme_manager.dart';
