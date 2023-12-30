@@ -2,8 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sidecampus/home_screen/screen/pdf_reader_screen.dart';
-
 
 import '../../Constance/constance.dart';
 import '../../Constance/theme.dart';
@@ -12,6 +10,7 @@ import '../../data_layer/controller/home_controller.dart';
 import '../../data_layer/manager/manager.dart';
 import '../../data_layer/models/audio_player_model.dart';
 import '../../data_layer/models/book_preview_data.dart';
+import '../../home_screen/screen/pdf_reader_screen.dart';
 import '../../utils/constant_string.dart';
 import '../../utils/dialog/rating_modal.dart';
 import '../../utils/dialog/snack_bars.dart';

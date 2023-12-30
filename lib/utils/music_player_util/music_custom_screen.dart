@@ -3,7 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 import '../../data_layer/manager/manager.dart';
 import '../color.dart';
 import '../slide_up_panel.dart';
@@ -123,6 +122,22 @@ class PlayerScreen extends ConsumerWidget {
                           CircleAvatar(radius: 35, child: _playButton()),
                           _nextButton(playerController, context),
                         ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Center(
+                        child: IconButton(
+                          iconSize: 12,
+                          onPressed: () {
+                            playerController.closePlayerModal();
+                          },
+                          icon: Icon(
+                            Icons.close,
+                            color: Colors.white,
+                            size: 40,
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 90 + bottomPadding,

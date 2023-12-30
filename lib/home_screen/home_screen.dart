@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../Constance/constance.dart';
+import '../data_layer/controller/home_controller.dart';
+import '../data_layer/manager/manager.dart';
 import '../data_layer/models/home_response_model.dart';
 import '../home_screen/screen/25_search.dart';
 import '../home_screen/screen/9_FROM_HELL.dart';
@@ -15,15 +18,12 @@ import '../home_screen/widget/collections_widget.dart';
 import '../home_screen/widget/shimmer.dart';
 import '../home_screen/widget/subscription_widger.dart';
 import '../home_screen/widget/view_widget.dart';
-import '../utils/images.dart';
-import '../utils/page_state.dart';
-
-import '../data_layer/controller/home_controller.dart';
-import '../data_layer/manager/manager.dart';
 import '../message/message_screen.dart';
 import '../utils/custom_cache_image.dart';
+import '../utils/images.dart';
 import '../utils/list_helper.dart';
 import '../utils/native_launcher.dart';
+import '../utils/page_state.dart';
 import '../utils/scaffold/custom_scaffold.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -208,8 +208,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               }
                             },
                             myPlan: (homeController
-                                ?.homeResponseModel?.data?.myPlan ?? []).isEmpty? null: (homeController
-                                ?.homeResponseModel?.data?.myPlan ?? []).first ,
+                                            ?.homeResponseModel?.data?.myPlan ??
+                                        [])
+                                    .isEmpty
+                                ? null
+                                : (homeController
+                                            ?.homeResponseModel?.data?.myPlan ??
+                                        [])
+                                    .first,
                           ),
                           SizedBox(
                             height: 20,
@@ -322,20 +328,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Popular",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                      fontSize: 14,
+                          !isListEmpty(homeController
+                                  ?.homeResponseModel?.data?.popular)
+                              ? Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Popular",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .copyWith(
+                                            fontSize: 14,
+                                          ),
                                     ),
-                              ),
-                            ],
-                          ),
+                                  ],
+                                )
+                              : Container(),
                           SizedBox(
                             height: 10,
                           ),
@@ -375,20 +385,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           SizedBox(
                             height: 30,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Viewed",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                      fontSize: 14,
+                          !isListEmpty(homeController
+                                  ?.homeResponseModel?.data?.viewd)
+                              ? Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Viewed",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .copyWith(
+                                            fontSize: 14,
+                                          ),
                                     ),
-                              ),
-                            ],
-                          ),
+                                  ],
+                                )
+                              : Container(),
                           SizedBox(
                             height: 20,
                           ),
