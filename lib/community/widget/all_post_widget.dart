@@ -73,6 +73,7 @@ class _AllPostWidgetState extends ConsumerState<AllPostWidget> {
                 index: index,
                 allPost: ref.read(communityManager).posts[index],
                 onTap: () {
+                  print(index);
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (builder) => SinglePostScreen(
                             scrollController: _scrollController,

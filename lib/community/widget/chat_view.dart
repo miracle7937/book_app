@@ -1,7 +1,8 @@
 import 'dart:developer';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:chewie/chewie.dart';
+import 'package:flick_video_player/flick_video_player.dart';
+// import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_time_ago/get_time_ago.dart';
@@ -24,16 +25,19 @@ class ChatViewWidget extends ConsumerStatefulWidget {
   final ScrollController scrollController;
   final VoidCallback? onTap;
   final Widget? selector;
-  final VoidCallback? willRefresh;
-  const ChatViewWidget({
-    Key? key,
-    this.allPost,
-    required this.index,
-    this.selector,
-    this.onTap,
-    required this.scrollController,
-    this.willRefresh,
-  }) : super(key: key);
+  final VoidCallback? willRefresh, willRefreshComment;
+  final bool forSingleView;
+  const ChatViewWidget(
+      {Key? key,
+      this.allPost,
+      required this.index,
+      this.selector,
+      this.onTap,
+      required this.scrollController,
+      this.willRefresh,
+      this.willRefreshComment,
+      this.forSingleView = false})
+      : super(key: key);
 
   @override
   ConsumerState<ChatViewWidget> createState() => _ChatViewWidgetState();
@@ -62,6 +66,9 @@ class _ChatViewWidgetState extends ConsumerState<ChatViewWidget> {
           .whenComplete(() {
         if (widget.willRefresh != null) {
           widget.willRefresh!();
+          if (widget.forSingleView) {
+            widget.willRefreshComment!();
+          }
         }
       });
     }
@@ -94,8 +101,8 @@ class _ChatViewWidgetState extends ConsumerState<ChatViewWidget> {
   @override
   void initState() {
     super.initState();
-    like = widget.allPost!.likes!;
-    comment = widget.allPost!.comment!;
+    like = widget.allPost?.likes ?? 0;
+    comment = widget.allPost?.comment ?? 0;
   }
 
   @override
@@ -229,6 +236,7 @@ class _ChatViewWidgetState extends ConsumerState<ChatViewWidget> {
   }
 
   Widget getUI(FileFormat format, String? file) {
+    // return VisibleListItem(index: widget.index, scrollController: widget.scrollController,);
     print(format);
     if (file == null) {
       return Container();
@@ -272,18 +280,22 @@ class _MediaVideo extends StatefulWidget {
 }
 
 class _MediaVideoState extends State<_MediaVideo> {
-  late VideoPlayerController _controller;
-  late ChewieController _chewieController;
+  // late VideoPlayerController _controller;
+  // late ChewieController _chewieController;
+  late VideoPlayerController controller;
+  late FlickManager flickManager;
   bool _isVisible = false;
 
   void _checkIfWidgetIsVisible() async {
+    print("Scrollable ===========================");
     if (_isVideoVisible()) {
       if (!_isVisible) {
         log('Video ${widget.index} is now visible!');
       }
     } else {
       if (_isVisible) {
-        _chewieController.pause();
+        //     flickManager.flickControlManager?.pause();
+        // _chewieController.pause();
 
         log('Video ${widget.index} is now out of view!');
       }
@@ -292,7 +304,7 @@ class _MediaVideoState extends State<_MediaVideo> {
 
   bool _isVideoVisible() {
     print("Video Visibility");
-    if (!_controller.value.isPlaying) {
+    if (!controller.value.isPlaying) {
       return false;
     }
 
@@ -315,18 +327,19 @@ class _MediaVideoState extends State<_MediaVideo> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.filePath))
-      ..initialize().then((_) {
-        setState(() {});
-      });
-    _chewieController = ChewieController(
-      videoPlayerController: _controller,
-      autoPlay: true,
-      looping: true,
-    );
-    _controller.addListener(() {
+    // controller = VideoPlayerController.networkUrl(
+    //   Uri.parse(
+    //       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
+    // );
+
+    controller = VideoPlayerController.networkUrl(Uri.parse(widget.filePath));
+
+    flickManager =
+        FlickManager(videoPlayerController: controller, autoPlay: false);
+
+    controller.addListener(() {
       if (!_isVideoVisible()) {
-        _controller.pause();
+        // controller.pause();
       }
     });
     widget.scrollController.addListener(_checkIfWidgetIsVisible);
@@ -335,8 +348,9 @@ class _MediaVideoState extends State<_MediaVideo> {
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
-    _chewieController.dispose();
+    // controller.dispose();
+    // flickManager.dispose();
+    // _chewieController.dispose();
     widget.scrollController.removeListener(_checkIfWidgetIsVisible);
   }
 
@@ -344,10 +358,20 @@ class _MediaVideoState extends State<_MediaVideo> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.35,
-      child: Center(
-          child: Chewie(
-        controller: _chewieController,
-      )),
+
+      child: Column(
+        children: [
+          Center(
+            child: AspectRatio(
+                aspectRatio: 16 / 11,
+                child: FlickVideoPlayer(flickManager: flickManager)),
+          ),
+        ],
+      ),
+      // child: Center(
+      //     child: Chewie(
+      //   controller: _chewieController,
+      // )),
     );
   }
 }

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_time_ago/get_time_ago.dart';
-import '../community/widget/chat_view.dart';
-import '../utils/scaffold/custom_scaffold.dart';
 
+import '../community/widget/chat_view.dart';
 import '../data_layer/manager/manager.dart';
 import '../data_layer/models/post_comment_model.dart';
 import '../data_layer/models/post_model_response.dart';
 import '../profile/widget/select_image_view.dart';
 import '../utils/list_helper.dart';
+import '../utils/scaffold/custom_scaffold.dart';
 import '../utils/string_helper.dart';
 
 class SinglePostScreen extends ConsumerStatefulWidget {
@@ -86,7 +86,12 @@ class _SinglePostScreenState extends ConsumerState<SinglePostScreen> {
                                   ?.data
                                   ?.allPost
                                   ?.first,
+                              willRefreshComment: () {
+                                // ref.read(communityManager).openPostComment(
+                                //     widget.allPost!.id.toString());
+                              },
                               willRefresh: () {
+                                print("WWWWWWWWW");
                                 //refresh it
                                 ref.read(communityManager).openPostComment(
                                     widget.allPost!.id.toString());
@@ -140,7 +145,9 @@ class ViewOfComment extends StatelessWidget {
                               .textTheme
                               .bodySmall!
                               .copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
                         ),
                         Text(
                           getDateTime(comment.createdAt),
@@ -161,10 +168,10 @@ class ViewOfComment extends StatelessWidget {
                 ),
                 Text(
                   comment.comment ?? "",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .copyWith(fontSize: 14, fontWeight: FontWeight.w700),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey),
                 ),
               ],
             ),

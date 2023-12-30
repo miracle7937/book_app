@@ -1,5 +1,5 @@
 class ApiRoute {
-  static String BaseRoute = "https://sidecampus.bplux.store";
+  static String BaseRoute = "http://sidecampus.com";
   static String registration = "$BaseRoute/api/register";
   static String home = "$BaseRoute/api/home";
   static String login = "$BaseRoute/api/login";
