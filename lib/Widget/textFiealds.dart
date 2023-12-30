@@ -5,7 +5,12 @@ import 'package:flutter/services.dart';
 
 import '../Constance/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+<<<<<<< HEAD
 import 'package:lovebook/Constance/theme.dart';
+>>>>>>> 350af3f (save up)
+=======
+>>>>>>> 6c7cf89 (save up)
+
 import '../utils/themes/theme_manager.dart';
 
 class MyTextFieald extends StatefulWidget {
