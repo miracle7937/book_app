@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sidecampus/data_layer/models/user_response.dart';
-import 'package:sidecampus/utils/color.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
+import '../Constance/constance.dart';
 import '../data_layer/controller/home_controller.dart';
 import '../data_layer/manager/manager.dart';
 import '../data_layer/models/home_response_model.dart';
@@ -20,8 +20,6 @@ import '../home_screen/widget/subscription_widger.dart';
 import '../home_screen/widget/view_widget.dart';
 import '../message/message_screen.dart';
 import '../utils/custom_cache_image.dart';
-import '../utils/greetingutl.dart';
-import '../utils/images.dart';
 import '../utils/list_helper.dart';
 import '../utils/local_storage_data.dart';
 import '../utils/native_launcher.dart';
@@ -236,259 +234,233 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                     MaterialPageRoute(
                                         builder: (_) => SubscribeScreen()));
 
-                                if (status == true) {
-                                  log("Refresh home=============>");
-                                  homeController?.getHomeData(refresh: true);
-                                }
-                              },
-                              myPlan: (homeController?.homeResponseModel?.data
-                                              ?.myPlan ??
-                                          [])
-                                      .isEmpty
-                                  ? null
-                                  : (homeController?.homeResponseModel?.data
-                                              ?.myPlan ??
-                                          [])
-                                      .first,
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Category",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                        fontSize: 14,
-                                      ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            homeController?.pageState == PageState.loading
-                                ? ShimmerView(
-                                    height: 100,
-                                  )
-                                : SizedBox(
-                                    height: 100,
-                                    child: ListView.builder(
-                                      itemCount: homeController
+                              if (status == true) {
+                                log("Refresh home=============>");
+                                homeController?.getHomeData(refresh: true);
+                              }
+                            },
+                            myPlan: (homeController
+                                ?.homeResponseModel?.data?.myPlan ?? []).isEmpty? null: (homeController
+                                ?.homeResponseModel?.data?.myPlan ?? []).first ,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Category",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontSize: 14,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          homeController?.pageState == PageState.loading
+                              ? ShimmerView(
+                                  height: 100,
+                                )
+                              : SizedBox(
+                                  height: 100,
+                                  child: ListView.builder(
+                                    itemCount: homeController?.homeResponseModel
+                                            ?.data?.collection?.length ??
+                                        0,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (_, index) => InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (builder) =>
+                                                    ShelfScreen(
+                                                      animationController:
+                                                          _animationController,
+                                                      index: index,
+                                                    )));
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: CollectionWidget(
+                                          image: BookImages().getCollection(),
+                                          collection: homeController
                                               ?.homeResponseModel
                                               ?.data
-                                              ?.collection
-                                              ?.length ??
-                                          0,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (_, index) => InkWell(
+                                              ?.collection?[index],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Latest",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontSize: 14,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          homeController?.pageState == PageState.loading
+                              ? ShimmerView(
+                                  height: 220,
+                                )
+                              : SizedBox(
+                                  height: 220,
+                                  child: ListView.builder(
+                                    itemCount: homeController?.homeResponseModel
+                                            ?.data?.latest?.length ??
+                                        0,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (_, index) {
+                                      Latest? latest = homeController
+                                          ?.homeResponseModel
+                                          ?.data
+                                          ?.latest?[index];
+                                      return BookOfTheWeek(
                                         onTap: () {
                                           Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (builder) =>
-                                                      ShelfScreen(
-                                                        animationController:
-                                                            _animationController,
-                                                        index: index,
-                                                      )));
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) => FromHellScreen(
+                                                bookID: latest?.id,
+                                              ),
+                                            ),
+                                          );
                                         },
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: CollectionWidget(
-                                            image: BookImages().getCollection(),
-                                            collection: homeController
+                                        latest: latest,
+                                      );
+                                    },
+                                  ),
+                                ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Popular",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontSize: 14,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          homeController?.pageState == PageState.loading
+                              ? ShimmerView(
+                                  height: 160,
+                                )
+                              : SizedBox(
+                                  height: 160,
+                                  child: ListView.builder(
+                                    itemCount: homeController?.homeResponseModel
+                                            ?.data?.popular?.length ??
+                                        0,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (_, index) => InkWell(
+                                      onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => FromHellScreen(
+                                            bookID: homeController
                                                 ?.homeResponseModel
                                                 ?.data
-                                                ?.collection?[index],
+                                                ?.popular?[index]
+                                                .id,
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Latest",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                        fontSize: 14,
-                                      ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            homeController?.pageState == PageState.loading
-                                ? ShimmerView(
-                                    height: 220,
-                                  )
-                                : SizedBox(
-                                    height: 220,
-                                    child: ListView.builder(
-                                      itemCount: homeController
-                                              ?.homeResponseModel
-                                              ?.data
-                                              ?.latest
-                                              ?.length ??
-                                          0,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (_, index) {
-                                        Latest? latest = homeController
+                                      child: PopularWidget(
+                                        popularModel: homeController
                                             ?.homeResponseModel
                                             ?.data
-                                            ?.latest?[index];
-                                        return BookOfTheWeek(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (_) => FromHellScreen(
-                                                  bookID: latest?.id,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          latest: latest,
-                                        );
-                                      },
-                                    ),
-                                  ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            !isListEmpty(homeController
-                                    ?.homeResponseModel?.data?.popular)
-                                ? Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Popular",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge!
-                                            .copyWith(
-                                              fontSize: 14,
-                                            ),
-                                      ),
-                                    ],
-                                  )
-                                : Container(),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            homeController?.pageState == PageState.loading
-                                ? ShimmerView(
-                                    height: 160,
-                                  )
-                                : SizedBox(
-                                    height: 160,
-                                    child: ListView.builder(
-                                      itemCount: homeController
-                                              ?.homeResponseModel
-                                              ?.data
-                                              ?.popular
-                                              ?.length ??
-                                          0,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (_, index) => InkWell(
-                                        onTap: () => Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (_) => FromHellScreen(
-                                              bookID: homeController
-                                                  ?.homeResponseModel
-                                                  ?.data
-                                                  ?.popular?[index]
-                                                  .id,
-                                            ),
-                                          ),
-                                        ),
-                                        child: PopularWidget(
-                                          popularModel: homeController
-                                              ?.homeResponseModel
-                                              ?.data
-                                              ?.popular?[index],
-                                        ),
+                                            ?.popular?[index],
                                       ),
                                     ),
                                   ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            !isListEmpty(homeController
-                                    ?.homeResponseModel?.data?.viewd)
-                                ? Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Viewed",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge!
-                                            .copyWith(
-                                              fontSize: 14,
-                                            ),
-                                      ),
-                                    ],
-                                  )
-                                : Container(),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            !isListEmpty(homeController
-                                    ?.homeResponseModel?.data?.viewd)
-                                ? SizedBox(
-                                    height: 280,
-                                    child: ListView(
-                                      scrollDirection: Axis.horizontal,
-                                      children: (homeController
-                                                      ?.homeResponseModel
-                                                      ?.data
-                                                      ?.viewd ??
-                                                  [])
-                                              .map((e) => InkWell(
-                                                    onTap: () {
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (_) =>
-                                                              FromHellScreen(
-                                                            bookID: e.id,
-                                                          ),
+                                ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Viewed",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontSize: 14,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          !isListEmpty(homeController
+                                  ?.homeResponseModel?.data?.viewd)
+                              ? SizedBox(
+                                  height: 280,
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: (homeController?.homeResponseModel
+                                                    ?.data?.viewd ??
+                                                [])
+                                            .map((e) => InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            FromHellScreen(
+                                                          bookID: e.id,
                                                         ),
-                                                      );
-                                                    },
-                                                    child: ViewedWidget(
-                                                      viewd: e,
-                                                    ),
-                                                  ))
-                                              .toList() ??
-                                          [],
-                                    ),
-                                  )
-                                : Container(),
-                            SizedBox(
-                              height: 20,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: ViewedWidget(
+                                                    viewd: e,
+                                                  ),
+                                                ))
+                                            .toList() ??
+                                        [],
+                                  ),
+                                )
+                              : Container(),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
