@@ -48,8 +48,9 @@ class SearchBookController extends ChangeNotifier {
       }
       pageState = PageState.loaded;
       notifyListeners();
-    }).catchError((onError) {
-      log(onError);
+    }).catchError((onError, v) {
+      log(onError.toString());
+      print(v);
       pageState = PageState.loaded;
       notifyListeners();
     });

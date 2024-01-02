@@ -3,13 +3,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../utils/scaffold/custom_scaffold.dart';
+import 'package:sidecampus/utils/images.dart';
 
 import '../Widget/rating_stars.dart';
 import '../data_layer/manager/manager.dart';
 import '../data_layer/models/search_book_response.dart';
 import '../home_screen/screen/9_FROM_HELL.dart';
 import '../home_screen/widget/shimmer_widget.dart';
+import '../utils/list_helper.dart';
+import '../utils/scaffold/custom_scaffold.dart';
 
 class ShelfScreen extends ConsumerStatefulWidget {
   final AnimationController animationController;
@@ -143,47 +145,70 @@ class _ShelfScreenState extends ConsumerState<ShelfScreen>
                                     ))
                                 .toList(),
                           ),
-                          Expanded(
-                              child: GridView.builder(
-                            shrinkWrap: true,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    crossAxisSpacing: 8.0,
-                                    mainAxisSpacing: 8.0,
-                                    childAspectRatio: (150.0 / 220.0)),
-                            itemCount: ref
-                                    .watch(searchBookManager)
-                                    .searchBookResponseCategories
-                                    ?.data
-                                    ?.length ??
-                                0,
-                            itemBuilder: (context, index) {
-                              // return Text("ok");
-                              return InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => FromHellScreen(
-                                        bookID: ref
+                          !isListEmpty(ref
+                                  .watch(searchBookManager)
+                                  .searchBookResponseCategories
+                                  ?.data)
+                              ? Expanded(
+                                  child: GridView.builder(
+                                  shrinkWrap: true,
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 3,
+                                          crossAxisSpacing: 8.0,
+                                          mainAxisSpacing: 8.0,
+                                          childAspectRatio: (150.0 / 220.0)),
+                                  itemCount: ref
+                                          .watch(searchBookManager)
+                                          .searchBookResponseCategories
+                                          ?.data
+                                          ?.length ??
+                                      0,
+                                  itemBuilder: (context, index) {
+                                    // return Text("ok");
+                                    return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => FromHellScreen(
+                                              bookID: ref
+                                                  .watch(searchBookManager)
+                                                  .searchBookResponseCategories
+                                                  ?.data?[index]
+                                                  .id,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: _View(
+                                        fullBookData: ref
                                             .watch(searchBookManager)
-                                            .searchBookResponseCategories
-                                            ?.data?[index]
-                                            .id,
+                                            .searchBookResponseCategories!
+                                            .data![index],
                                       ),
-                                    ),
-                                  );
-                                },
-                                child: _View(
-                                  fullBookData: ref
-                                      .watch(searchBookManager)
-                                      .searchBookResponseCategories!
-                                      .data![index],
+                                    );
+                                  },
+                                ))
+                              : Container(
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.35,
+                                      ),
+                                      SizedBox(
+                                          height: 30,
+                                          child: Image.asset(
+                                              BookImages.empty_list)),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text("Empty bookshelf")
+                                    ],
+                                  ),
                                 ),
-                              );
-                            },
-                          )),
                           SizedBox(
                             height: 5,
                           ),

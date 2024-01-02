@@ -10,6 +10,23 @@ class CollectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Center(
+          child: Text(
+            collection?.title ?? "",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+        ),
+      ),
+      width: MediaQuery.of(context).size.width * 0.4,
+      decoration:
+          BoxDecoration(image: DecorationImage(image: AssetImage(image!))),
+    );
     return Stack(
       children: [
         Image.asset(
@@ -24,8 +41,10 @@ class CollectionWidget extends StatelessWidget {
           child: Center(
             child: Text(
               collection?.title ?? "",
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),

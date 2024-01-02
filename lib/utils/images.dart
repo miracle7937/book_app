@@ -39,6 +39,7 @@ class BookImages {
   static String saved_cards = "$root/saved_cards.png";
   static String pay_pal = "$root/pay_pal.png";
   static String card_payment = "$root/card_payment.png";
+  static String empty_list = "$root/empty_list.png";
 
   List<String> collections = [
     collection1,

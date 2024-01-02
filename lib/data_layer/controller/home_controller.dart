@@ -98,8 +98,7 @@ class HomeController extends ChangeNotifier {
       if (value.status == true) {
         _previewCallBack?.openPDF(value.data?.book?.first.pdf ?? "");
       } else {
-        _previewCallBack?.onError("You can't read this book");
-        ;
+        _previewCallBack?.onError("Please subscribe to have full access");
       }
       pageState = PageState.loaded;
       notifyListeners();

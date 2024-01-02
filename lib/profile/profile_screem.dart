@@ -3,15 +3,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../data_layer/models/user_response.dart';
 import '../data_layer/repository/profile_repository.dart';
 import '../profile/saved_card_screen.dart';
 import '../profile/update_screen_user.dart';
 import '../profile/widget/select_image_view.dart';
 import '../utils/color.dart';
-import '../utils/images.dart';
-
 import '../utils/dialog/alart_dialog.dart';
+import '../utils/images.dart';
 import '../utils/local_storage_data.dart';
 import '../utils/themes/theme_manager.dart';
 import 'contact_us.dart';
@@ -330,6 +330,7 @@ class _ProfileScreemState extends State<ProfileScreem>
                                     print("hhhhhhhhhh");
                                     showAlertDialog(context,
                                         title: 'Log out ?',
+                                        btnTitle: "Logout",
                                         subTitle:
                                             'Are you sure you want to Logout? ',
                                         onTap: () {

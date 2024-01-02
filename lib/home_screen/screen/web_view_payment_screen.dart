@@ -25,16 +25,16 @@ class _MyHomePageState extends State<SubscriptionPage> {
           },
           onPageStarted: (String url) {},
           onPageFinished: (String url) {
-            if (url.contains("status")) {
-              Navigator.pop(context, true);
-            }
+            // if (url.contains("status")) {
+            //   Navigator.pop(context, true);
+            // }
             print("NAV onPageFinished ${url}");
           },
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) async {
             print("NAV URL ${request.url}");
             if (request.url.contains("status")) {
-              return NavigationDecision.navigate;
+              Navigator.pop(context, true);
             }
             return NavigationDecision.navigate;
           },
