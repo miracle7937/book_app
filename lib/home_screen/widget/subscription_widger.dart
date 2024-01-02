@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../../data_layer/models/home_response_model.dart';
 import '../../utils/color.dart';
 import '../../utils/images.dart';
@@ -52,6 +51,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
     print(totalDays.toString());
     print(remainingDays.toString());
     print(percentageRemaining.toString());
+    setState(() {});
   }
 
   @override

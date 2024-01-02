@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../data_layer/models/home_response_model.dart';
 
+import '../../data_layer/models/home_response_model.dart';
 import '../../utils/themes/theme_manager.dart';
 
 class PopularWidget extends ConsumerWidget {
@@ -66,6 +66,8 @@ class PopularWidget extends ConsumerWidget {
                   ),
                   Text(
                     popularModel?.description ?? "",
+                    overflow: TextOverflow.ellipsis, // Set overflow behavior
+                    maxLines: 3,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         fontSize: 10, color: Theme.of(context).disabledColor),
                   ),

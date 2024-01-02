@@ -37,8 +37,8 @@ class FullBookData {
   String? updatedAt;
   String? category;
   String? images;
-  int? plays;
-  int? views;
+  String? plays;
+  String? views;
   int? reads;
   int? rating;
 

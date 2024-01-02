@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Future<void> showAlertDialog(BuildContext context,
-    {String? title, String? subTitle, VoidCallback? onTap}) async {
+    {String? title,
+    String? subTitle,
+    VoidCallback? onTap,
+    String? btnTitle}) async {
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
@@ -16,7 +19,7 @@ Future<void> showAlertDialog(BuildContext context,
               onTap != null ? onTap() : null;
               Navigator.of(context).pop();
             },
-            child: Text('Delete'),
+            child: Text(btnTitle ?? 'Delete'),
           ),
           CupertinoDialogAction(
             onPressed: () {
