@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 
-import '../utils/constant_string.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data_layer/models/registration_model.dart';
 import '../data_layer/models/user_credential_model.dart';
 import '../data_layer/models/user_response.dart';
+import '../utils/constant_string.dart';
 
 class LocalDataStorage {
   // static const _storage = FlutterSecureStorage();
@@ -25,6 +26,26 @@ class LocalDataStorage {
     );
   }
 
+  static savePlans(Plan? plan) async {
+    final SharedPreferences _storage = await SharedPreferences.getInstance();
+    _storage.setString(
+      ConstantString.plans,
+      json.encode(plan!.toJson()),
+    );
+  }
+
+  static Future<Plan?> getPlan() async {
+    final SharedPreferences _storage = await SharedPreferences.getInstance();
+    String? value = _storage.getString(
+      ConstantString.plans,
+    );
+    Map<String, dynamic> map = value != null ? json.decode(value) : {};
+    if (map.isNotEmpty) {
+      return Plan.fromJson(map);
+    }
+    return null;
+  }
+
   static Future<String?> getToken() async {
     final SharedPreferences _storage = await SharedPreferences.getInstance();
     String? value = _storage.getString(
@@ -42,6 +63,7 @@ class LocalDataStorage {
     String? value = _storage.getString(
       ConstantString.userDataKey,
     );
+
     Map<String, dynamic> map = value != null ? json.decode(value) : {};
     if (map.isNotEmpty) {
       return UserData.fromJson(map);

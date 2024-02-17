@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 
-
 import '../../utils/biometric_controller.dart';
 import '../../utils/local_storage_data.dart';
 import '../../utils/page_state.dart';
@@ -94,6 +93,7 @@ class RegistrationController extends ChangeNotifier {
         if (data.status == true) {
           LocalDataStorage.saveUserData(data.data);
           LocalDataStorage.saveLoginData(loginModel);
+          LocalDataStorage.savePlans(data.plans?.first);
           _view?.onSuccessLogin();
         } else {
           _view?.onError(data.message);

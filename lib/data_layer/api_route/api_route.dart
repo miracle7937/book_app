@@ -34,6 +34,7 @@ class ApiRoute {
   static String subscribe = "$BaseRoute/api/subscribe";
   static String subscribe_savedCards =
       "$BaseRoute/api/subscribe-with-savedcards";
+  static String stripeWebHook = "$BaseRoute/api/webhook";
   static String allPost(int value) => "$BaseRoute/api/all-post/$value";
   static String getMyPost(int value) => "$BaseRoute/api/my-post/$value";
 }

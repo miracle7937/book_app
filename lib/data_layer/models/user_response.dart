@@ -4,14 +4,22 @@ class UserResponse {
   bool status;
   String message;
   UserData data;
+  List<Plan?>? plans;
 
-  UserResponse(
-      {required this.status, required this.data, required this.message});
+  UserResponse({
+    required this.status,
+    required this.data,
+    required this.message,
+    required this.plans,
+  });
 
   factory UserResponse.fromJson(Map<String, dynamic> json) {
     return UserResponse(
       status: json['status'],
       message: json['message'],
+      plans: json['plans'] == null
+          ? null
+          : List<Plan>.from(json['plans'].map((plan) => Plan.fromJson(plan))),
       data: UserData.fromJson(json['data']),
     );
   }
@@ -20,6 +28,7 @@ class UserResponse {
     return {
       'status': status,
       'data': data.toJson(),
+      "plans": plans?.map((plan) => plan?.toJson()).toList(),
     };
   }
 }
@@ -39,7 +48,7 @@ class UserData {
   DateTime? updatedAt;
   String? token;
   MyPlan? myPlan;
-  List<Plan?>? plans;
+
   List<UserCard?>? savedCard;
 
   UserData(
@@ -57,7 +66,6 @@ class UserData {
       this.updatedAt,
       this.token,
       this.myPlan,
-      this.plans,
       this.savedCard});
 
   factory UserData.fromJson(Map<String, dynamic> json) {
@@ -74,9 +82,6 @@ class UserData {
       status: json['status'],
       token: json['token'],
       myPlan: json['my_plan'] == null ? null : MyPlan.fromJson(json['my_plan']),
-      plans: json['plans'] == null
-          ? null
-          : List<Plan>.from(json['plans'].map((plan) => Plan.fromJson(plan))),
       savedCard: json['saved_card'] == null
           ? null
           : List<UserCard>.from(
@@ -100,7 +105,6 @@ class UserData {
       'updated_at': updatedAt?.toIso8601String(),
       'token': token,
       'my_plan': myPlan?.toJson(),
-      'plans': plans?.map((plan) => plan?.toJson()).toList(),
       'saved_card': savedCard?.map((e) => e?.toJson()).toList(),
     };
   }
@@ -109,8 +113,8 @@ class UserData {
 class Plan {
   int id;
   String title;
-  int amount;
-  int period;
+  String amount;
+  String period;
 
   Plan({
     required this.id,

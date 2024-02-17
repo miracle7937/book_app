@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 import '../../data_layer/controller/subscribe_controller.dart';
 import '../../data_layer/manager/manager.dart';
 import '../../data_layer/models/user_response.dart';
@@ -11,6 +10,7 @@ import '../../utils/images.dart';
 import '../../utils/list_helper.dart';
 import '../../utils/local_storage_data.dart';
 import '../../utils/scaffold/custom_scaffold.dart';
+import '../../utils/stripe_payment.dart';
 import 'web_view_payment_screen.dart';
 
 class SubscribeScreen extends ConsumerStatefulWidget {
@@ -40,6 +40,7 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
     return CustomScaffold(
       pageState: ref.watch(subscribeManager).pageState,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         title: Text("Payment"),
       ),
       body: Padding(
@@ -100,7 +101,18 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
               height: 10,
             ),
             InkWell(
-                onTap: () => ref.watch(subscribeManager).getSubscribe("stripe"),
+                onTap: () async {
+                  Plan? plans = await LocalDataStorage.getPlan();
+                  UserData? user = await LocalDataStorage.getUserData();
+                  StripeService().stripeMakePayment((value) {
+                    Navigator.pop(context, value);
+                  },
+                      email: user?.email ?? "",
+                      amount: double.parse(plans?.amount ?? "1.0")
+                          .toInt()
+                          .toString());
+                },
+                // onTap: () => ref.watch(subscribeManager).getSubscribe("stripe"),
                 child: subscribeWidget(
                     image: BookImages.card_payment,
                     title: "Pay with Debit/Credit Card",
@@ -238,10 +250,19 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
                 ],
               ),
               Spacer(),
-              Text(
-                "\$25",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-              ),
+              FutureBuilder<Plan?>(
+                  future: LocalDataStorage.getPlan(),
+                  builder: (context, snapshot) {
+                    return Column(
+                      children: [
+                        Text(
+                          "\$${snapshot.data?.amount}",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 22),
+                        ),
+                      ],
+                    );
+                  }),
               SizedBox(
                 width: 10,
               )

@@ -1,9 +1,11 @@
 import 'package:get_time_ago/get_time_ago.dart';
+
 import '../utils/string_helper.dart';
 
 class ConstantString {
   static final userDataKey = "UserData";
   static final loginData = "loginData";
+  static final plans = "plans";
   static final themeData = "themeData";
   static final enableBiometric = "enableBiometric";
   static final credential = "credential";
