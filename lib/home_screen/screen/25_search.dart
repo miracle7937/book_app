@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 import '../../Widget/linear_indicator.dart';
 import '../../Widget/textFiealds2.dart';
 import '../../data_layer/controller/searchbook_controller.dart';

@@ -1,4 +1,3 @@
-
 import '../api_route/api_route.dart';
 import '../models/audio_player_model.dart';
 import '../models/book_preview_data.dart';
@@ -71,5 +70,11 @@ class HomeRepository {
     final service = await ServerRequest().postData(
         path: ApiRoute.subscribe_savedCards, body: data, cache: false);
     return SubscribeModel.fromJson(service.data);
+  }
+
+  static Future<GenericResponse> checkIfStripeIsSuccessful(Map data) async {
+    final service = await ServerRequest()
+        .postData(path: ApiRoute.stripeWebHook, body: data, cache: false);
+    return GenericResponse.fromJson(service.data);
   }
 }

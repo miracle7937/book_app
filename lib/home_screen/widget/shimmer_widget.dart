@@ -8,13 +8,13 @@ class ShimmerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey[500]!, // You can customize the shimmer colors
+      baseColor: Colors.grey[500]!,
       highlightColor: Colors.grey[300]!,
       enabled: true,
       direction: ShimmerDirection.ltr,
       child: Container(
         height: height,
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width * 0.9,
         color: Colors.white,
       ),
     );

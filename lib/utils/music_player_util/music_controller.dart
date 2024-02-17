@@ -108,7 +108,6 @@ class MusicController extends ChangeNotifier {
 
   void _listenForChangesInPosition() {
     AudioService.position.listen((position) {
-      print("FUCK MIRCLE Position $position");
       final oldState = progressBarStatus;
       progressBarStatus.current = position;
       progressBarStatus.buffered = oldState.buffered;
@@ -119,7 +118,6 @@ class MusicController extends ChangeNotifier {
 
   void _listenForChangesInBufferedPosition() {
     _audioHandler.playbackState.listen((playbackState) {
-      print("FUCK MIRCLE $playbackState");
       final oldState = progressBarStatus;
       progressBarStatus.buffered = playbackState.bufferedPosition;
       progressBarStatus.current = oldState.current;
@@ -130,7 +128,6 @@ class MusicController extends ChangeNotifier {
 
   void _listenForChangesInDuration() {
     _audioHandler.mediaItem.listen((mediaItem) async {
-      print("FUCK MIRCLE Duration $mediaItem");
       final oldState = progressBarStatus;
 
       progressBarStatus.total = mediaItem?.duration ?? Duration.zero;

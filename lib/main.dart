@@ -3,8 +3,11 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+
 import '../Catalogue/54_books.dart';
 import '../Catalogue/55_the_divine_comedy.dart';
 import '../Constance/theme.dart';
@@ -43,7 +46,6 @@ import '../utils/local_storage_data.dart';
 import '../utils/music_player_util/audio_handler.dart';
 import '../utils/navigation_service.dart';
 import '../utils/themes/theme_manager.dart';
-
 import 'auth/register.dart';
 import 'home_screen/test_audio.dart';
 
@@ -52,6 +54,9 @@ Future<void> main() async {
   //audio init
   audioHandler = await initAudioService();
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+
+  Stripe.publishableKey = dotenv.env['StripePublicKey'] ?? "";
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -90,8 +95,7 @@ class _MyAppState extends State<MyApp> {
       return GetMaterialApp(
         navigatorKey: NavigationService.navigatorKey,
 
-        scrollBehavior: const ScrollBehavior(
-            ),
+        scrollBehavior: const ScrollBehavior(),
         title: "Lovebook",
         theme: theme.getTheme(),
         debugShowCheckedModeBanner: false,
