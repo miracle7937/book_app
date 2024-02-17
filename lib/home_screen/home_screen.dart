@@ -9,6 +9,7 @@ import '../Constance/constance.dart';
 import '../data_layer/controller/home_controller.dart';
 import '../data_layer/manager/manager.dart';
 import '../data_layer/models/home_response_model.dart';
+import '../data_layer/models/user_response.dart';
 import '../home_screen/screen/25_search.dart';
 import '../home_screen/screen/9_FROM_HELL.dart';
 import '../home_screen/screen/subscribe_screen.dart';
@@ -19,7 +20,10 @@ import '../home_screen/widget/shimmer.dart';
 import '../home_screen/widget/subscription_widger.dart';
 import '../home_screen/widget/view_widget.dart';
 import '../message/message_screen.dart';
+import '../utils/color.dart';
 import '../utils/custom_cache_image.dart';
+import '../utils/greetingutl.dart';
+import '../utils/images.dart';
 import '../utils/list_helper.dart';
 import '../utils/local_storage_data.dart';
 import '../utils/native_launcher.dart';
@@ -79,6 +83,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     setState(() {
       isLoadingSliderDetail = true;
     });
+
     await Future.delayed(const Duration(milliseconds: 700));
     setState(() {
       isLoadingSliderDetail = false;
@@ -465,7 +470,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               ),
             ),
           ),
-        );
+          ));
       },
     );
   }
