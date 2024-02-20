@@ -48,7 +48,7 @@ class _PDFPreviewState extends State<PDFPreview> {
       body: PDF().cachedFromUrl(
         widget.pdf,
         placeholder: (progress) =>
-            Center(child: Text('$progress %  downloading ......')),
+            Center(child: Text('$progress %  Please wait we are getting the book ready..')),
         errorWidget: (error) => Center(child: Text(error.toString())),
       ),
     );
