@@ -42,7 +42,7 @@ class RegisterModel {
     }
 
     if (gender == null || (gender != 'MALE' && gender != 'FEMALE')) {
-      return 'Invalid gender';
+      return 'Please select your gender';
     }
 
     if (password == null || password!.length < 4) {

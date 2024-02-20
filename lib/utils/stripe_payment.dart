@@ -12,6 +12,8 @@ import '../data_layer/repository/home_repository.dart';
 class StripeService {
   Map<String, dynamic>? paymentIntent;
 
+  Future inAppPurchase() async {}
+
   Future<void> stripeMakePayment(Function(bool) onRefresh,
       {required String email, required String amount}) async {
     try {
@@ -37,8 +39,8 @@ class StripeService {
       {required String email, required String payid}) async {
     try {
       await Stripe.instance.presentPaymentSheet();
-      await HomeRepository.checkIfStripeIsSuccessful(
-          {"email": email, "payid": payid});
+      await HomeRepository.checkTransactionSuccessful(
+          {"email": email, "payid": payid, "is_Stripe": true});
       Fluttertoast.showToast(msg: 'Payment successfully completed');
 
       onRefresh(true);

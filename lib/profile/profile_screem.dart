@@ -327,7 +327,6 @@ class _ProfileScreemState extends State<ProfileScreem>
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    print("hhhhhhhhhh");
                                     showAlertDialog(context,
                                         title: 'Log out ?',
                                         btnTitle: "Logout",
@@ -335,7 +334,6 @@ class _ProfileScreemState extends State<ProfileScreem>
                                             'Are you sure you want to Logout? ',
                                         onTap: () {
                                       RepoRepository.logOut().then((value) {
-                                        //if request is true delete account
                                         if (value == true) {
                                           LocalDataStorage.clearUser();
                                           Navigator.pushNamed(context, "/");

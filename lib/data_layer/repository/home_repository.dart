@@ -72,7 +72,7 @@ class HomeRepository {
     return SubscribeModel.fromJson(service.data);
   }
 
-  static Future<GenericResponse> checkIfStripeIsSuccessful(Map data) async {
+  static Future<GenericResponse> checkTransactionSuccessful(Map data) async {
     final service = await ServerRequest()
         .postData(path: ApiRoute.stripeWebHook, body: data, cache: false);
     return GenericResponse.fromJson(service.data);

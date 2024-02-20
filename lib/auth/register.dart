@@ -6,22 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../Constance/constance.dart';
 import '../Constance/theme.dart';
 import '../Widget/buttons.dart';
+import '../Widget/linear_indicator.dart';
 import '../Widget/pageview.dart';
 import '../Widget/textFiealds.dart';
 import '../auth/forget_password_screen.dart';
 import '../auth/otp_email_phone_screen.dart';
-import '../utils/color.dart';
-import '../utils/images.dart';
-import '../utils/page_state.dart';
-
-import '../Widget/linear_indicator.dart';
 import '../data_layer/controller/registraion_controller.dart';
 import '../data_layer/manager/manager.dart';
 import '../utils/biometric_controller.dart';
+import '../utils/color.dart';
 import '../utils/dialog/snack_bars.dart';
+import '../utils/images.dart';
+import '../utils/page_state.dart';
 import '../utils/themes/theme_manager.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
@@ -72,14 +72,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: SvgPicture.asset(
-                      ConstanceData.sv1,
-                      height: 20,
-                    ),
+                  SizedBox(
+                    width: 20,
                   ),
                   Image.asset(
                     ConstanceData.s2,

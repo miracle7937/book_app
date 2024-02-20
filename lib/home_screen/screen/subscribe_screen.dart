@@ -1,13 +1,17 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../../data_layer/controller/subscribe_controller.dart';
 import '../../data_layer/manager/manager.dart';
 import '../../data_layer/models/user_response.dart';
+import '../../data_layer/repository/home_repository.dart';
 import '../../utils/color.dart';
 import '../../utils/dialog/snack_bars.dart';
 import '../../utils/images.dart';
-import '../../utils/list_helper.dart';
 import '../../utils/local_storage_data.dart';
 import '../../utils/scaffold/custom_scaffold.dart';
 import '../../utils/stripe_payment.dart';
@@ -23,15 +27,72 @@ class SubscribeScreen extends ConsumerStatefulWidget {
 class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
     implements SubscribeView {
   UserData? userData;
+  List<ProductDetails> _products = [];
+  bool _isAvailable = false;
+  StreamSubscription<List<PurchaseDetails>>? _subscription;
+
   @override
   void initState() {
     getUserCard();
     super.initState();
+    final Stream<List<PurchaseDetails>> purchaseUpdates =
+        InAppPurchase.instance.purchaseStream;
+    _subscription =
+        purchaseUpdates.listen((List<PurchaseDetails> purchaseDetailsList) {
+      _listenToPurchaseUpdated(purchaseDetailsList);
+    }, onError: (error) {
+      // Handle errors here
+    }, onDone: () {});
+    _initStore();
+  }
+
+  Future<void> _initStore() async {
+    final bool isAvailable = await InAppPurchase.instance.isAvailable();
+    if (!isAvailable) {
+      setState(() {
+        _isAvailable = isAvailable;
+      });
+      return;
+    }
+    const Set<String> _kProductIds = {'02'};
+    final ProductDetailsResponse response =
+        await InAppPurchase.instance.queryProductDetails(_kProductIds);
+    if (response.notFoundIDs.isNotEmpty) {
+      errorSnack(context, "Product can't be found");
+    }
+    setState(() {
+      _products = response.productDetails;
+      _isAvailable = isAvailable;
+    });
+  }
+
+  void _buyProduct(ProductDetails productDetails) {
+    final PurchaseParam purchaseParam =
+        PurchaseParam(productDetails: productDetails);
+    InAppPurchase.instance.buyNonConsumable(purchaseParam: purchaseParam);
+  }
+
+  void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
+    purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
+      if (purchaseDetails.status == PurchaseStatus.purchased) {
+        await HomeRepository.checkTransactionSuccessful(
+            {"email": userData?.email, "payid": "", "is_Stripe": false});
+      }
+      if (purchaseDetails.pendingCompletePurchase) {
+        await InAppPurchase.instance.completePurchase(purchaseDetails);
+      }
+    });
   }
 
   getUserCard() async {
     userData = await LocalDataStorage.getUserData();
     setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
   }
 
   @override
@@ -52,51 +113,6 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
             SizedBox(
               height: 20,
             ),
-            !isListEmpty(userData?.savedCard)
-                ? SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.3,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Pay with saved Cards"),
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: userData?.savedCard?.length ?? 0,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  child: InkWell(
-                                    onTap: () {
-                                      print(userData
-                                          ?.savedCard![index]!.customerId);
-                                      ref
-                                          .watch(subscribeManager)
-                                          .payWithSavedCard(
-                                              "25",
-                                              userData?.savedCard![index]!
-                                                  .customerId!);
-                                    },
-                                    child: savedWidget(
-                                      image: BookImages.card_payment,
-                                      title: userData?.savedCard![index]!.name,
-                                      subTitle2:
-                                          "EXP   -${userData?.savedCard![index]!.expMonth}/ ${userData?.savedCard![index]!.expYear}",
-                                      subTitle:
-                                          "**** **** **** ${userData?.savedCard![index]!.last4}",
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : Column(),
             SizedBox(
               height: 10,
             ),
@@ -104,6 +120,11 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
                 onTap: () async {
                   Plan? plans = await LocalDataStorage.getPlan();
                   UserData? user = await LocalDataStorage.getUserData();
+
+                  if (Platform.isIOS) {
+                    //in app purchase
+                    _buyProduct(_products.first);
+                  }
                   StripeService().stripeMakePayment((value) {
                     Navigator.pop(context, value);
                   },
