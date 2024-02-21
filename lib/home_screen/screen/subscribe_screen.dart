@@ -42,8 +42,10 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
         purchaseUpdates.listen((List<PurchaseDetails> purchaseDetailsList) {
       _listenToPurchaseUpdated(purchaseDetailsList);
     }, onError: (error) {
-      // Handle errors here
-    }, onDone: () {});
+      Fluttertoast.showToast(msg: 'Payment error:$error');
+    }, onDone: () {
+      Fluttertoast.showToast(msg: 'Payment completed');
+    });
     _initStore();
   }
 
@@ -75,13 +77,14 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
-      if (purchaseDetails.status == PurchaseStatus.purchased) {
+      if (purchaseDetails.status == PurchaseStatus.purchased ||
+          purchaseDetails.status == PurchaseStatus.restored) {
         Fluttertoast.showToast(msg: 'Payment successfully completed');
         await HomeRepository.checkTransactionSuccessful(
             {"email": userData?.email, "payid": "", "is_Stripe": false});
       }
       if (purchaseDetails.pendingCompletePurchase) {
-        Fluttertoast.showToast(msg: 'Transaction Pending}');
+        Fluttertoast.showToast(msg: 'Transaction Pending');
         await InAppPurchase.instance.completePurchase(purchaseDetails);
       }
     });
