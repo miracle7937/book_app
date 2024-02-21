@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../../data_layer/controller/subscribe_controller.dart';
@@ -75,10 +76,12 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
       if (purchaseDetails.status == PurchaseStatus.purchased) {
+        Fluttertoast.showToast(msg: 'Payment successfully completed');
         await HomeRepository.checkTransactionSuccessful(
             {"email": userData?.email, "payid": "", "is_Stripe": false});
       }
       if (purchaseDetails.pendingCompletePurchase) {
+        Fluttertoast.showToast(msg: 'Transaction Pending}');
         await InAppPurchase.instance.completePurchase(purchaseDetails);
       }
     });
@@ -124,6 +127,7 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
                   if (Platform.isIOS) {
                     //in app purchase
                     _buyProduct(_products.first);
+                    return;
                   }
                   StripeService().stripeMakePayment((value) {
                     Navigator.pop(context, value);
