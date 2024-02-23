@@ -39,18 +39,19 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
     super.initState();
 
     if (Platform.isIOS) {
+      _initStore();
       //in app purchase
       final Stream<List<PurchaseDetails>> purchaseUpdates =
           InAppPurchase.instance.purchaseStream;
       _subscription =
           purchaseUpdates.listen((List<PurchaseDetails> purchaseDetailsList) {
+        log("IM LIStening for product ${purchaseDetailsList.length}");
         _listenToPurchaseUpdated(purchaseDetailsList);
       }, onError: (error) {
         Fluttertoast.showToast(msg: 'Payment error:$error');
       }, onDone: () {
         Fluttertoast.showToast(msg: 'Payment completed');
       });
-      _initStore();
     }
   }
 
@@ -62,6 +63,7 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
       });
       return;
     }
+    print("NOT AVAILABLE");
     const Set<String> _kProductIds = {'one_month_test'};
     final ProductDetailsResponse response =
         await InAppPurchase.instance.queryProductDetails(_kProductIds);
