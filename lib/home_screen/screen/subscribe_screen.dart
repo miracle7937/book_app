@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -67,6 +68,7 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
     if (response.notFoundIDs.isNotEmpty) {
       errorSnack(context, "Product can't be found");
     }
+    log("==================> product List ${response.productDetails}");
     setState(() {
       _products = response.productDetails;
       _isAvailable = isAvailable;
