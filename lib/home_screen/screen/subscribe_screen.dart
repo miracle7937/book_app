@@ -61,15 +61,12 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
       });
       return;
     }
-    const Set<String> _kProductIds = {'02'};
+    const Set<String> _kProductIds = {'one_month_test'};
     final ProductDetailsResponse response =
         await InAppPurchase.instance.queryProductDetails(_kProductIds);
     if (response.notFoundIDs.isNotEmpty) {
       errorSnack(context, "Product can't be found");
     }
-    final purchaseParam =
-        PurchaseParam(productDetails: response.productDetails.first);
-    await InAppPurchase.instance.buyConsumable(purchaseParam: purchaseParam);
     setState(() {
       _products = response.productDetails;
       _isAvailable = isAvailable;
