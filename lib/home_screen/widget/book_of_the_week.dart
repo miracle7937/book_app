@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../../data_layer/models/home_response_model.dart';
 import '../../utils/custom_cache_image.dart';
 import '../../utils/images.dart';
@@ -23,18 +22,24 @@ class BookOfTheWeek extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomCacheImage(
-                  height: 160,
-                  image: latest?.images ?? "",
+                Center(
+                  child: CustomCacheImage(
+                    height: 160,
+                    image: latest?.images ?? "",
+                  ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  latest?.title ?? "",
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontSize: 14,
-                      ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Text(
+                    latest?.title ?? "",
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontSize: 14,
+                        ),
+                  ),
                 ),
                 SizedBox(
                   height: 5,

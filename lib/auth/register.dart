@@ -281,7 +281,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                               controller.registerModel.lastName = v;
                             }),
                         CustomDropdown(
-                          hintText: "Gender",
+                          hintText: "Gender(optional)",
                           dropdownItems: ["MALE", "FEMALE"],
                           onSelect: (v) {
                             print(v);

@@ -96,13 +96,19 @@ class _FromHellScreenState extends ConsumerState<FromHellScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        homeController
-                                ?.bookPreviewData?.data?.book?.first.title ??
-                            "",
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontSize: 14,
-                            ),
+                      SizedBox(
+                        child: Text(
+                          homeController
+                                  ?.bookPreviewData?.data?.book?.first.title ??
+                              "",
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    fontSize: 14,
+                                  ),
+                        ),
+                        width: MediaQuery.of(context).size.width * 0.9,
                       ),
                     ],
                   ),

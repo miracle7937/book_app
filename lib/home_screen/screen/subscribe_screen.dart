@@ -36,17 +36,21 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
   void initState() {
     getUserCard();
     super.initState();
-    final Stream<List<PurchaseDetails>> purchaseUpdates =
-        InAppPurchase.instance.purchaseStream;
-    _subscription =
-        purchaseUpdates.listen((List<PurchaseDetails> purchaseDetailsList) {
-      _listenToPurchaseUpdated(purchaseDetailsList);
-    }, onError: (error) {
-      Fluttertoast.showToast(msg: 'Payment error:$error');
-    }, onDone: () {
-      Fluttertoast.showToast(msg: 'Payment completed');
-    });
-    _initStore();
+
+    if (Platform.isIOS) {
+      //in app purchase
+      final Stream<List<PurchaseDetails>> purchaseUpdates =
+          InAppPurchase.instance.purchaseStream;
+      _subscription =
+          purchaseUpdates.listen((List<PurchaseDetails> purchaseDetailsList) {
+        _listenToPurchaseUpdated(purchaseDetailsList);
+      }, onError: (error) {
+        Fluttertoast.showToast(msg: 'Payment error:$error');
+      }, onDone: () {
+        Fluttertoast.showToast(msg: 'Payment completed');
+      });
+      _initStore();
+    }
   }
 
   Future<void> _initStore() async {
@@ -63,6 +67,9 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
     if (response.notFoundIDs.isNotEmpty) {
       errorSnack(context, "Product can't be found");
     }
+    final purchaseParam =
+        PurchaseParam(productDetails: response.productDetails.first);
+    await InAppPurchase.instance.buyConsumable(purchaseParam: purchaseParam);
     setState(() {
       _products = response.productDetails;
       _isAvailable = isAvailable;
@@ -115,47 +122,55 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            premiumACCESSWidget(),
+            InkWell(
+                onTap: () {
+                  if (Platform.isIOS) {
+                    //in app purchase
+                    _buyProduct(_products.first);
+                    return;
+                  }
+                },
+                child: premiumACCESSWidget()),
             SizedBox(
               height: 20,
             ),
             SizedBox(
               height: 10,
             ),
-            InkWell(
-                onTap: () async {
-                  Plan? plans = await LocalDataStorage.getPlan();
-                  UserData? user = await LocalDataStorage.getUserData();
-
-                  if (Platform.isIOS) {
-                    //in app purchase
-                    _buyProduct(_products.first);
-                    return;
-                  }
-                  StripeService().stripeMakePayment((value) {
-                    Navigator.pop(context, value);
-                  },
-                      email: user?.email ?? "",
-                      amount: double.parse(plans?.amount ?? "1.0")
-                          .toInt()
-                          .toString());
-                },
-                // onTap: () => ref.watch(subscribeManager).getSubscribe("stripe"),
-                child: subscribeWidget(
-                    image: BookImages.card_payment,
-                    title: "Pay with Debit/Credit Card",
-                    subTitle:
-                        "Instantly subscribe your account with Debit or credit card")),
-            SizedBox(
-              height: 10,
-            ),
-            InkWell(
-                onTap: () =>
-                    ref.watch(subscribeManager).getSubscribe("pay_pal"),
-                child: subscribeWidget(
-                    image: BookImages.pay_pal,
-                    title: "Paypal Payment",
-                    subTitle: "Instantly subscribe your account with Paypal")),
+            if (Platform.isAndroid)
+              Column(
+                children: [
+                  InkWell(
+                      onTap: () async {
+                        Plan? plans = await LocalDataStorage.getPlan();
+                        UserData? user = await LocalDataStorage.getUserData();
+                        StripeService().stripeMakePayment((value) {
+                          Navigator.pop(context, value);
+                        },
+                            email: user?.email ?? "",
+                            amount: double.parse(plans?.amount ?? "1.0")
+                                .toInt()
+                                .toString());
+                      },
+                      // onTap: () => ref.watch(subscribeManager).getSubscribe("stripe"),
+                      child: subscribeWidget(
+                          image: BookImages.card_payment,
+                          title: "Pay with Debit/Credit Card",
+                          subTitle:
+                              "Instantly subscribe your account with Debit or credit card")),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                      onTap: () =>
+                          ref.watch(subscribeManager).getSubscribe("pay_pal"),
+                      child: subscribeWidget(
+                          image: BookImages.pay_pal,
+                          title: "Paypal Payment",
+                          subTitle:
+                              "Instantly subscribe your account with Paypal")),
+                ],
+              )
           ],
         ),
       ),

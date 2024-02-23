@@ -41,10 +41,6 @@ class RegisterModel {
       return 'Last name is required';
     }
 
-    if (gender == null || (gender != 'MALE' && gender != 'FEMALE')) {
-      return 'Please select your gender';
-    }
-
     if (password == null || password!.length < 4) {
       return 'Password must be at least 4 characters';
     }
