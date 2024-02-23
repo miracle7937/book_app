@@ -85,6 +85,9 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
       if (purchaseDetails.status == PurchaseStatus.error) {
+        print("Purchase Error: ${purchaseDetails.error}");
+        print("Error Code: ${purchaseDetails.error?.code}");
+        print("Error Message: ${purchaseDetails.error?.message}");
         Fluttertoast.showToast(msg: 'Error Purchase Status');
         return;
       }
