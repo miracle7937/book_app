@@ -63,7 +63,6 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
       });
       return;
     }
-    print("NOT AVAILABLE");
     const Set<String> _kProductIds = {'one_month_test'};
     final ProductDetailsResponse response =
         await InAppPurchase.instance.queryProductDetails(_kProductIds);
@@ -85,6 +84,11 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
+      if (purchaseDetails.status == PurchaseStatus.error) {
+        Fluttertoast.showToast(msg: 'Error Purchase Status');
+        return;
+      }
+
       if (purchaseDetails.status == PurchaseStatus.purchased ||
           purchaseDetails.status == PurchaseStatus.restored) {
         Fluttertoast.showToast(msg: 'Payment successfully completed');
