@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -56,6 +57,10 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
   }
 
   Future<void> _initStore() async {
+    if (Platform.isIOS) {
+      await FlutterInappPurchase.instance.initialize();
+      FlutterInappPurchase.instance.clearTransactionIOS();
+    }
     final bool isAvailable = await InAppPurchase.instance.isAvailable();
     if (!isAvailable) {
       setState(() {
