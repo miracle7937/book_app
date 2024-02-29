@@ -107,6 +107,7 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
         print("Error Code: ${purchaseDetails.error?.code}");
         print("Error Message: ${purchaseDetails.error?.message}");
         removeLoader();
+        Navigator.of(context).pop();
         Fluttertoast.showToast(msg: 'Error Purchase Status');
         return;
       }
@@ -392,7 +393,7 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
           content: Text('Are you sure you want to subscribe?'),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: Text('Cancel', style: TextStyle(color: Colors.red)),
               onPressed: () {
                 Navigator.of(context).pop(); // Dismiss the dialog
               },
