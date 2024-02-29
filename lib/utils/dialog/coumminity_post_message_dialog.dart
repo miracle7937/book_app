@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 
 import '../../Widget/textFiealds.dart';
 
-class PostCommentDialog extends StatelessWidget {
+class CommentDialog extends StatelessWidget {
+  final String title, btnTitle;
+
   final Function(String?)? onTap;
-  PostCommentDialog({this.onTap});
+  CommentDialog({this.onTap, required this.title, required this.btnTitle});
   final TextEditingController messageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Post a Comment'),
+      title: Text(title),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           MyTextFieald(
-              controller: messageController,
-              hintText: "Post a comment",
-              onChange: (v) {}),
+              controller: messageController, hintText: title, onChange: (v) {}),
         ],
       ),
       actions: [
@@ -36,7 +36,7 @@ class PostCommentDialog extends StatelessWidget {
             onTap != null ? onTap!(messageController.text) : null;
           },
           child: Text(
-            'Post',
+            btnTitle,
             style: TextStyle(color: Colors.black),
           ),
         ),

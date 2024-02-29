@@ -73,4 +73,10 @@ class CommunityRepository {
         path: ApiRoute.comment, body: {"post_id": id, "message": message});
     return GenericResponse.fromJson(service.data);
   }
+
+  static Future<GenericResponse> reportPost(String id, message) async {
+    final service = await ServerRequest().postData(
+        path: ApiRoute.report_post, body: {"post_id": id, "comment": message});
+    return GenericResponse.fromJson(service.data);
+  }
 }

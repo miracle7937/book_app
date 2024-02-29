@@ -3,13 +3,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import '../utils/color.dart';
+import 'package:sidecampus/data_layer/models/user_response.dart';
 import 'package:video_player/video_player.dart';
 
 import '../Widget/buttons.dart';
 import '../data_layer/controller/community_post_controller.dart';
 import '../data_layer/manager/manager.dart';
+import '../utils/color.dart';
 import '../utils/dialog/snack_bars.dart';
+import '../utils/foul_word_checker.dart';
+import '../utils/local_storage_data.dart';
 
 class VideoPickerScreen extends ConsumerStatefulWidget {
   @override
@@ -66,6 +69,18 @@ class _VideoPickerScreenState extends ConsumerState<VideoPickerScreen>
   }
 
   Future<void> _uploadVideo(String? videoPath) async {
+    UserData? userData = await LocalDataStorage.getUserData();
+
+    bool isFoul = FoulWordChecker()
+        .check(textEditingController.text, (userData?.abusiveWords) ?? []);
+    if (isFoul) {
+      errorSnack(
+        context,
+        "Use of profane language is prohibited.",
+      );
+      return;
+    }
+
     ref
         .watch(videoUploadProvider)
         .uploadVideo(videoPath, textEditingController.text)

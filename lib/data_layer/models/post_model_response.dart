@@ -75,10 +75,11 @@ class AllPost {
   String? userName;
   String? createdAt;
   String? media;
-  Null? mediaTitle;
+  String? mediaTitle;
   String? message;
   int? likes;
   int? comment;
+  int? userId;
 
   AllPost(
       {this.id,
@@ -89,7 +90,8 @@ class AllPost {
       this.mediaTitle,
       this.message,
       this.likes,
-      this.comment});
+      this.comment,
+      this.userId});
 
   AllPost.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -101,6 +103,7 @@ class AllPost {
     message = json['message'];
     likes = json['likes'];
     comment = json['comment'];
+    userId = json['user_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -114,6 +117,7 @@ class AllPost {
     data['message'] = this.message;
     data['likes'] = this.likes;
     data['comment'] = this.comment;
+    data['user_id'] = this.userId;
     return data;
   }
 }

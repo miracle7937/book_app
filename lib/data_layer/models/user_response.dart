@@ -48,7 +48,8 @@ class UserData {
   DateTime? updatedAt;
   String? token;
   MyPlan? myPlan;
-
+  List<String>? abusiveWords;
+  List<String>? inAppIosPurchase;
   List<UserCard?>? savedCard;
 
   UserData(
@@ -66,27 +67,37 @@ class UserData {
       this.updatedAt,
       this.token,
       this.myPlan,
-      this.savedCard});
+      this.savedCard,
+      this.abusiveWords,
+      this.inAppIosPurchase});
 
   factory UserData.fromJson(Map<String, dynamic> json) {
     return UserData(
-      id: json['id'],
-      email: json['email'],
-      gender: json['gender'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      wallet: json['wallet'],
-      deviceId: json['device_id'],
-      isEmailVerified: json['is_email_verified'],
-      code: json['code'],
-      status: json['status'],
-      token: json['token'],
-      myPlan: json['my_plan'] == null ? null : MyPlan.fromJson(json['my_plan']),
-      savedCard: json['saved_card'] == null
-          ? null
-          : List<UserCard>.from(
-              json['saved_card'].map((plan) => UserCard.fromJson(plan))),
-    );
+        id: json['id'],
+        email: json['email'],
+        gender: json['gender'],
+        firstName: json['first_name'],
+        lastName: json['last_name'],
+        wallet: json['wallet'],
+        deviceId: json['device_id'],
+        isEmailVerified: json['is_email_verified'],
+        code: json['code'],
+        status: json['status'],
+        token: json['token'],
+        myPlan:
+            json['my_plan'] == null ? null : MyPlan.fromJson(json['my_plan']),
+        savedCard: json['saved_card'] == null
+            ? null
+            : List<UserCard>.from(
+                json['saved_card'].map((plan) => UserCard.fromJson(plan))),
+        abusiveWords: json['abusive_words'] == null
+            ? []
+            : (json["abusive_words"] as List).map((e) => e.toString()).toList(),
+        inAppIosPurchase: json['inapp_ios_purchase'] == null
+            ? []
+            : (json["inapp_ios_purchase"] as List)
+                .map((e) => e.toString())
+                .toList());
   }
 
   Map<String, dynamic> toJson() {
@@ -105,6 +116,8 @@ class UserData {
       'updated_at': updatedAt?.toIso8601String(),
       'token': token,
       'my_plan': myPlan?.toJson(),
+      'abusive_words': abusiveWords,
+      'inapp_ios_purchase': inAppIosPurchase,
       'saved_card': savedCard?.map((e) => e?.toJson()).toList(),
     };
   }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:sidecampus/utils/local_storage_data.dart';
 
 import '../../data_layer/manager/manager.dart';
 import '../../utils/color.dart';
+import '../../utils/dialog/snack_bars.dart';
+import '../../utils/foul_word_checker.dart';
 import '../../utils/images.dart';
 import '../../utils/string_helper.dart';
 import '../../utils/themes/theme_manager.dart';
@@ -73,7 +75,7 @@ class CommunityMessageWidget extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (builder) => ImageUploadScreen()));
 
-                          if (isSuccessful) {
+                          if (isSuccessful == true) {
                             ref.watch(communityManager).refresh();
                           }
                         },
@@ -97,9 +99,21 @@ class CommunityMessageWidget extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         if (isNotEmpty(textEditingController.text)) {
-                          ref
-                              .watch(communityManager)
-                              .postWithNoMedia(textEditingController.text);
+                          LocalDataStorage.getUserData().then((value) {
+                            bool isFoul = FoulWordChecker().check(
+                                textEditingController.text,
+                                (value?.abusiveWords) ?? []);
+                            if (isFoul) {
+                              errorSnack(
+                                context,
+                                "Use of profane language is prohibited.",
+                              );
+                            } else {
+                              ref
+                                  .watch(communityManager)
+                                  .postWithNoMedia(textEditingController.text);
+                            }
+                          });
                         }
                       },
                       child: Container(

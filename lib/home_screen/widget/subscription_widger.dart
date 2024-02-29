@@ -159,7 +159,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                   width: 10,
                 ),
                 Text(
-                  "Tap to subScribe",
+                  "Tap to subscribe",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ],

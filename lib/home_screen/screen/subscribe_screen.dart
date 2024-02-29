@@ -78,7 +78,8 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
       });
       return;
     }
-    const Set<String> _kProductIds = {'one_month_test'};
+    UserData? userData = await LocalDataStorage.getUserData();
+    Set<String> _kProductIds = {userData?.inAppIosPurchase?.first ?? ""};
     final ProductDetailsResponse response =
         await InAppPurchase.instance.queryProductDetails(_kProductIds);
     if (response.notFoundIDs.isNotEmpty) {

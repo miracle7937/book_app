@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_time_ago/get_time_ago.dart';
 import 'package:lottie/lottie.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:sidecampus/utils/local_storage_data.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../data_layer/manager/manager.dart';
@@ -47,6 +48,7 @@ class _ChatViewWidgetState extends ConsumerState<ChatViewWidget> {
   late int like;
   late int comment;
   bool isLike = false;
+  bool hidReportPost = false;
   String getDateTime(String? date) {
     if (isEmpty(date)) {
       return "N/A";
@@ -63,6 +65,25 @@ class _ChatViewWidgetState extends ConsumerState<ChatViewWidget> {
       ref
           .watch(communityManager)
           .comment(widget.allPost!.id.toString(), message!)
+          .whenComplete(() {
+        if (widget.willRefresh != null) {
+          widget.willRefresh!();
+          if (widget.forSingleView) {
+            widget.willRefreshComment!();
+          }
+        }
+      });
+    }
+  }
+
+  reportPost(String? message) {
+    if (isNotEmpty(message)) {
+      setState(() {
+        comment++;
+      });
+      ref
+          .watch(communityManager)
+          .reportPost(widget.allPost!.id.toString(), message!)
           .whenComplete(() {
         if (widget.willRefresh != null) {
           widget.willRefresh!();
@@ -101,8 +122,15 @@ class _ChatViewWidgetState extends ConsumerState<ChatViewWidget> {
   @override
   void initState() {
     super.initState();
+    init();
+  }
+
+  init() async {
     like = widget.allPost?.likes ?? 0;
     comment = widget.allPost?.comment ?? 0;
+    LocalDataStorage.getUserData().then((value) {
+      hidReportPost = value?.id == widget.allPost?.userId;
+    });
   }
 
   @override
@@ -191,10 +219,12 @@ class _ChatViewWidgetState extends ConsumerState<ChatViewWidget> {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return PostCommentDialog(
+                              return CommentDialog(
+                                title: 'Post a Comment',
                                 onTap: (message) {
                                   postComment(message);
                                 },
+                                btnTitle: "Post",
                               );
                             },
                           );
@@ -208,10 +238,9 @@ class _ChatViewWidgetState extends ConsumerState<ChatViewWidget> {
                         width: 5,
                       ),
                       Text(comment.toString()),
+                      Spacer(),
+                      hidReportPost == false ? multipleSelect() : Container()
                     ],
-                  ),
-                  SizedBox(
-                    height: 5,
                   ),
                 ],
               ),
@@ -232,6 +261,33 @@ class _ChatViewWidgetState extends ConsumerState<ChatViewWidget> {
               ],
             )),
       ),
+    );
+  }
+
+  multipleSelect() {
+    return PopupMenuButton<int>(
+      onSelected: (value) {
+        if (value == 1) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CommentDialog(
+                title: 'Report a Post',
+                onTap: (message) {
+                  reportPost(message);
+                },
+                btnTitle: 'Report',
+              );
+            },
+          );
+        }
+      },
+      itemBuilder: (context) => [
+        PopupMenuItem<int>(
+          value: 1,
+          child: Text('Report Post'),
+        ),
+      ],
     );
   }
 

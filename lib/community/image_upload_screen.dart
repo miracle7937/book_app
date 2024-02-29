@@ -7,8 +7,11 @@ import 'package:image_picker/image_picker.dart';
 import '../Widget/buttons.dart';
 import '../data_layer/controller/community_post_controller.dart';
 import '../data_layer/manager/manager.dart';
+import '../data_layer/models/user_response.dart';
 import '../utils/color.dart';
 import '../utils/dialog/snack_bars.dart';
+import '../utils/foul_word_checker.dart';
+import '../utils/local_storage_data.dart';
 
 class ImageUploadScreen extends ConsumerStatefulWidget {
   const ImageUploadScreen({Key? key}) : super(key: key);
@@ -43,6 +46,16 @@ class _ImageUploadScreenState extends ConsumerState<ImageUploadScreen>
   }
 
   Future<void> _uploadPicture(String? videoPath) async {
+    UserData? userData = await LocalDataStorage.getUserData();
+    bool isFoul = FoulWordChecker()
+        .check(textEditingController.text, (userData?.abusiveWords) ?? []);
+    if (isFoul) {
+      errorSnack(
+        context,
+        "Use of profane language is prohibited.",
+      );
+      return;
+    }
     ref
         .watch(videoUploadProvider)
         .uploadVideo(videoPath, textEditingController.text)

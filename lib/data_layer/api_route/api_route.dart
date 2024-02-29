@@ -29,6 +29,7 @@ class ApiRoute {
   static String deletePost = "$BaseRoute/api/delete-post";
   static String post_sub_comment = "$BaseRoute/api/post-sub-comment";
   static String comment = "$BaseRoute/api/comment";
+  static String report_post = "$BaseRoute/api/report-post";
   static String open_post = "$BaseRoute/api/open-post";
   static String postContent = "$BaseRoute/api/post";
   static String subscribe = "$BaseRoute/api/subscribe";
