@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
+import '../../Widget/linear_indicator.dart';
 import '../../data_layer/controller/subscribe_controller.dart';
 import '../../data_layer/manager/manager.dart';
 import '../../data_layer/models/user_response.dart';
@@ -33,6 +34,7 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
   List<ProductDetails> _products = [];
   bool _isAvailable = false;
   StreamSubscription<List<PurchaseDetails>>? _subscription;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -49,11 +51,19 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
         log("IM LIStening for product ${purchaseDetailsList.length}");
         _listenToPurchaseUpdated(purchaseDetailsList);
       }, onError: (error) {
+        removeLoader();
         Fluttertoast.showToast(msg: 'Payment error:$error');
       }, onDone: () {
+        removeLoader();
         Fluttertoast.showToast(msg: 'Payment completed');
       });
     }
+  }
+
+  removeLoader() {
+    setState(() {
+      isLoading = false;
+    });
   }
 
   Future<void> _initStore() async {
@@ -82,6 +92,9 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
   }
 
   void _buyProduct(ProductDetails productDetails) {
+    setState(() {
+      isLoading = true;
+    });
     final PurchaseParam purchaseParam =
         PurchaseParam(productDetails: productDetails);
     InAppPurchase.instance.buyNonConsumable(purchaseParam: purchaseParam);
@@ -93,6 +106,7 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
         print("Purchase Error: ${purchaseDetails.error}");
         print("Error Code: ${purchaseDetails.error?.code}");
         print("Error Message: ${purchaseDetails.error?.message}");
+        removeLoader();
         Fluttertoast.showToast(msg: 'Error Purchase Status');
         return;
       }
@@ -100,13 +114,16 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
       if (purchaseDetails.status == PurchaseStatus.purchased ||
           purchaseDetails.status == PurchaseStatus.restored) {
         Fluttertoast.showToast(msg: 'Payment successfully completed');
+        removeLoader();
         await HomeRepository.checkTransactionSuccessful(
             {"email": userData?.email, "payid": "", "is_Stripe": false});
       }
       if (purchaseDetails.pendingCompletePurchase) {
         Fluttertoast.showToast(msg: 'Transaction Pending');
+        removeLoader();
         await InAppPurchase.instance.completePurchase(purchaseDetails);
       }
+      removeLoader();
     });
   }
 
@@ -130,62 +147,74 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
         iconTheme: IconThemeData(color: Colors.black),
         title: Text("Payment"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
-                onTap: () {
-                  if (Platform.isIOS) {
-                    //in app purchase
-                    _buyProduct(_products.first);
-                    return;
-                  }
-                },
-                child: premiumACCESSWidget()),
-            SizedBox(
-              height: 20,
+      body: Column(
+        children: [
+          BookLinearProgressBar(
+            isloading: isLoading,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                InkWell(
+                    onTap: () {
+                      if (Platform.isIOS) {
+                        _showDeleteConfirmationDialog(context, () {
+                          _buyProduct(_products.first);
+                        });
+                        //in app purchase
+
+                        return;
+                      }
+                    },
+                    child: premiumACCESSWidget()),
+                SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                if (Platform.isAndroid)
+                  Column(
+                    children: [
+                      InkWell(
+                          onTap: () async {
+                            Plan? plans = await LocalDataStorage.getPlan();
+                            UserData? user =
+                                await LocalDataStorage.getUserData();
+                            StripeService().stripeMakePayment((value) {
+                              Navigator.pop(context, value);
+                            },
+                                email: user?.email ?? "",
+                                amount: double.parse(plans?.amount ?? "1.0")
+                                    .toInt()
+                                    .toString());
+                          },
+                          // onTap: () => ref.watch(subscribeManager).getSubscribe("stripe"),
+                          child: subscribeWidget(
+                              image: BookImages.card_payment,
+                              title: "Pay with Debit/Credit Card",
+                              subTitle:
+                                  "Instantly subscribe your account with Debit or credit card")),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      InkWell(
+                          onTap: () => ref
+                              .watch(subscribeManager)
+                              .getSubscribe("pay_pal"),
+                          child: subscribeWidget(
+                              image: BookImages.pay_pal,
+                              title: "Paypal Payment",
+                              subTitle:
+                                  "Instantly subscribe your account with Paypal")),
+                    ],
+                  )
+              ],
             ),
-            SizedBox(
-              height: 10,
-            ),
-            if (Platform.isAndroid)
-              Column(
-                children: [
-                  InkWell(
-                      onTap: () async {
-                        Plan? plans = await LocalDataStorage.getPlan();
-                        UserData? user = await LocalDataStorage.getUserData();
-                        StripeService().stripeMakePayment((value) {
-                          Navigator.pop(context, value);
-                        },
-                            email: user?.email ?? "",
-                            amount: double.parse(plans?.amount ?? "1.0")
-                                .toInt()
-                                .toString());
-                      },
-                      // onTap: () => ref.watch(subscribeManager).getSubscribe("stripe"),
-                      child: subscribeWidget(
-                          image: BookImages.card_payment,
-                          title: "Pay with Debit/Credit Card",
-                          subTitle:
-                              "Instantly subscribe your account with Debit or credit card")),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  InkWell(
-                      onTap: () =>
-                          ref.watch(subscribeManager).getSubscribe("pay_pal"),
-                      child: subscribeWidget(
-                          image: BookImages.pay_pal,
-                          title: "Paypal Payment",
-                          subTitle:
-                              "Instantly subscribe your account with Paypal")),
-                ],
-              )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -352,5 +381,29 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pop(context);
     });
+  }
+
+  void _showDeleteConfirmationDialog(BuildContext context, VoidCallback onTap) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Payment Confirm'),
+          content: Text('Are you sure you want to subscribe?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Dismiss the dialog
+              },
+            ),
+            TextButton(
+              child: Text('YES', style: TextStyle(color: AppColor.mainColor)),
+              onPressed: onTap,
+            ),
+          ],
+        );
+      },
+    );
   }
 }
