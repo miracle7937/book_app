@@ -59,6 +59,7 @@ class CommunityRepository {
   static Future<PostCommentModel> openPost(String? id) async {
     final service = await ServerRequest()
         .postData(path: ApiRoute.open_post, body: {"post_id": id});
+    print(service.data);
     return PostCommentModel.fromJson(service.data);
   }
 
