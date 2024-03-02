@@ -232,6 +232,24 @@ class CommunityController extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future reportComment(String id, String message) async {
+    pageState = PageState.loading;
+    notifyListeners();
+
+    try {
+      GenericResponse value =
+          await CommunityRepository.reportComment(id, message);
+      if (value.status == true) {
+        print("Comment successful");
+      } else {}
+      pageState = PageState.loaded;
+      notifyListeners();
+    } catch (v, i) {
+      pageState = PageState.loaded;
+      notifyListeners();
+    }
+  }
 }
 
 abstract class CommunityView {

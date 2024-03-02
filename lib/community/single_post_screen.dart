@@ -7,7 +7,10 @@ import '../data_layer/manager/manager.dart';
 import '../data_layer/models/post_comment_model.dart';
 import '../data_layer/models/post_model_response.dart';
 import '../profile/widget/select_image_view.dart';
+import '../utils/dialog/coumminity_post_message_dialog.dart';
+import '../utils/dialog/snack_bars.dart';
 import '../utils/list_helper.dart';
+import '../utils/local_storage_data.dart';
 import '../utils/scaffold/custom_scaffold.dart';
 import '../utils/string_helper.dart';
 
@@ -28,6 +31,19 @@ class SinglePostScreen extends ConsumerStatefulWidget {
 
 class _SinglePostScreenState extends ConsumerState<SinglePostScreen> {
   bool isLoading = true;
+  bool hidReportPost = false;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  init() async {
+    LocalDataStorage.getUserData().then((value) {
+      hidReportPost = value?.id == widget.allPost?.userId;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +107,6 @@ class _SinglePostScreenState extends ConsumerState<SinglePostScreen> {
                                 //     widget.allPost!.id.toString());
                               },
                               willRefresh: () {
-                                print("WWWWWWWWW");
                                 //refresh it
                                 ref.read(communityManager).openPostComment(
                                     widget.allPost!.id.toString());
@@ -99,11 +114,20 @@ class _SinglePostScreenState extends ConsumerState<SinglePostScreen> {
                             )
                           : Container(),
                       ViewOfComment(
-                          comment: ref
-                              .read(communityManager)
-                              .postCommentModel!
-                              .data!
-                              .comment![index]),
+                        comment: ref
+                            .read(communityManager)
+                            .postCommentModel!
+                            .data!
+                            .comment![index],
+                        reportWidget: hidReportPost == false
+                            ? multipleSelect(ref
+                                .read(communityManager)
+                                .postCommentModel!
+                                .data!
+                                .comment![index]
+                                .id!)
+                            : Container(),
+                      ),
                     ],
                   );
                 },
@@ -112,11 +136,53 @@ class _SinglePostScreenState extends ConsumerState<SinglePostScreen> {
           ),
         ));
   }
+
+  multipleSelect(int id) {
+    return PopupMenuButton<int>(
+      onSelected: (value) {
+        if (value == 1) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CommentDialog(
+                title: 'Report a Comment',
+                onTap: (message) {
+                  reportComment(message, id);
+                },
+                btnTitle: 'Report',
+              );
+            },
+          );
+        }
+      },
+      itemBuilder: (context) => [
+        PopupMenuItem<int>(
+          value: 1,
+          child: Text('Report Post'),
+        ),
+      ],
+    );
+  }
+
+  reportComment(String? message, int id) {
+    if (isNotEmpty(message)) {
+      ref
+          .watch(communityManager)
+          .reportComment(id.toString(), message!)
+          .whenComplete(() {
+        errorSnack(context,
+            "Comment has been reported and is currently under review.");
+      });
+    }
+  }
 }
 
 class ViewOfComment extends StatelessWidget {
   final Comment comment;
-  const ViewOfComment({Key? key, required this.comment}) : super(key: key);
+  final Widget reportWidget;
+  const ViewOfComment(
+      {Key? key, required this.comment, required this.reportWidget})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -173,12 +239,15 @@ class ViewOfComment extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                       color: Colors.grey),
                 ),
+                Row(
+                  children: [Spacer(), reportWidget ?? Container()],
+                )
               ],
             ),
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
-            color: Colors.white,
+            color: Theme.of(context).appBarTheme.backgroundColor,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.1), // Shadow color with alpha

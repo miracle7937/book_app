@@ -78,9 +78,6 @@ class _ChatViewWidgetState extends ConsumerState<ChatViewWidget> {
 
   reportPost(String? message) {
     if (isNotEmpty(message)) {
-      setState(() {
-        comment++;
-      });
       ref
           .watch(communityManager)
           .reportPost(widget.allPost!.id.toString(), message!)

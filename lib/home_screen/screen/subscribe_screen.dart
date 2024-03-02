@@ -119,6 +119,7 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
         removeLoader();
         await HomeRepository.checkTransactionSuccessful(
             {"email": userData?.email, "payid": "", "is_Stripe": false});
+        Navigator.pop(context, true);
       }
       if (purchaseDetails.pendingCompletePurchase) {
         Fluttertoast.showToast(msg: 'Transaction Pending');
@@ -164,6 +165,7 @@ class _SubscribeScreenState extends ConsumerState<SubscribeScreen>
                       if (Platform.isIOS) {
                         _showDeleteConfirmationDialog(context, () {
                           _buyProduct(_products.first);
+                          Navigator.pop(context);
                         });
                         //in app purchase
 
